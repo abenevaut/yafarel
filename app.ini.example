@@ -1,2 +1,3 @@
 [product]
 application.directory = PROJECT_PATH "/app"
+application.baseUri = "/"

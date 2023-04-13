@@ -6,6 +6,6 @@ class IndexController extends Controller_Abstract
 {
     public function indexAction()
     {
-        $this->getView()->content = "Hello World";
+        $this->getView()->content = 'Hello World';
     }
 }
