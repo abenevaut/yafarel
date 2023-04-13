@@ -4,6 +4,7 @@ namespace Tests;
 
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use Tests\YafTestCase;
 
 define('PROJECT_PATH',  dirname(dirname(__FILE__)));
 
