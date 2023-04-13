@@ -18,11 +18,12 @@
       <directory suffix=".php">./app</directory>
     </include>
   </coverage>
-  <!--    <php>-->
-  <!--        &lt;!&ndash; https://stackoverflow.com/questions/16657101/phpunit-cannot-send-session-cookie-headers-already-sent &ndash;&gt;-->
-  <!--        <ini name="session.use_cookies" value="0" />-->
-  <!--        <ini name="session.use_only_cookies" value="0" />-->
-  <!--        <ini name="session.use_trans_sid" value="0" />-->
-  <!--        <ini name="session.cache_limiter" value="" />-->
-  <!--    </php>-->
+      <php>
+<!--          &lt;!&ndash; https://stackoverflow.com/questions/16657101/phpunit-cannot-send-session-cookie-headers-already-sent &ndash;&gt;-->
+<!--          <ini name="session.use_cookies" value="0" />-->
+<!--          <ini name="session.use_only_cookies" value="0" />-->
+<!--          <ini name="session.use_trans_sid" value="0" />-->
+<!--          <ini name="session.cache_limiter" value="" />-->
+          <ini name="yaf.environ" value="testing" />
+      </php>
 </phpunit>
