@@ -1,9 +1,7 @@
 <?php
 
-$projectPath = dirname(dirname(__FILE__));
+define('PROJECT_PATH', dirname(dirname(__FILE__)));
 
-define('PROJECT_PATH',  $projectPath);
-
-(new \Yaf\Application("{$projectPath}/app.ini"))
+(new \Yaf\Application(PROJECT_PATH . '/app.ini'))
     ->bootstrap()
     ->run();

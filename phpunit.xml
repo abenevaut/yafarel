@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         colors="true"
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+        colors="true"
+        cacheDirectory=".phpunit.cache"
 >
-    <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
-        </testsuite>
-    </testsuites>
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./app</directory>
-        </include>
-    </coverage>
-<!--    <php>-->
-<!--        &lt;!&ndash; https://stackoverflow.com/questions/16657101/phpunit-cannot-send-session-cookie-headers-already-sent &ndash;&gt;-->
-<!--        <ini name="session.use_cookies" value="0" />-->
-<!--        <ini name="session.use_only_cookies" value="0" />-->
-<!--        <ini name="session.use_trans_sid" value="0" />-->
-<!--        <ini name="session.cache_limiter" value="" />-->
-<!--    </php>-->
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
+  </testsuites>
+  <coverage>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+  </coverage>
+  <!--    <php>-->
+  <!--        &lt;!&ndash; https://stackoverflow.com/questions/16657101/phpunit-cannot-send-session-cookie-headers-already-sent &ndash;&gt;-->
+  <!--        <ini name="session.use_cookies" value="0" />-->
+  <!--        <ini name="session.use_only_cookies" value="0" />-->
+  <!--        <ini name="session.use_trans_sid" value="0" />-->
+  <!--        <ini name="session.cache_limiter" value="" />-->
+  <!--    </php>-->
 </phpunit>

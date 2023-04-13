@@ -11,7 +11,6 @@ class IndexTest extends TestCase
     {
         $response = $this->get('/');
 
-//        $this->assertSuccess($response);
         $this->assertSame('Hello World', $this->getView()->content);
     }
 }
