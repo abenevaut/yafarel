@@ -1,4 +1,4 @@
-[product]
+[yaf]
 ; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
