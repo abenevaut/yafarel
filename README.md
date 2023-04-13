@@ -22,10 +22,13 @@ cp app.ini.example app.ini
 composer install
 ```
 
+## Command line interface
+```
+php artisan "request_uri=/<controller>/<method>"
+php artisan "request_uri=/<module>/<controller>/<method>"
+```
+
 ## Testing
-
-- note `yaf.environ` is defined to `testing`
-
 ```
 vendor/bin/phpunit
 ```

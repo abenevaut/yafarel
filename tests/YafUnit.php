@@ -45,7 +45,7 @@ trait YafUnit
             $this->getApplication()->getDispatcher()->returnResponse(true);
             $this->getApplication()->getDispatcher()->setView($this->getView());
 
-            Registry::set( 'ApplicationInit', true );
+            Registry::set('ApplicationInit', true);
         }
 
         return $this;
