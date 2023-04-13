@@ -40,6 +40,7 @@ jobs:
         with:
           php-version: ${{ env.php_version }}
           extensions: yaf
+          ini-values: yaf.use_spl_autoload=On, yaf.cache_config=Off, yaf.use_namespace=On, yaf.environ=testing
           coverage: pcov
           tools: composer:v2
 
