@@ -1,6 +1,8 @@
 # Yet another YAF framework
 
-Simple PHP YAF starter pack to run app and test it.
+## Description
+
+This is a simple YAF framework to start a new project.
 
 ## Setup PHP YAF extension
 ```
