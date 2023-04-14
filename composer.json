@@ -8,11 +8,20 @@
   ],
   "license": "GPL-3.0-only",
   "require": {
-    "php": "^7.4"
+    "php": "^8.1",
+    "ext-yaf": "^3.1",
+    "monolog/monolog": "^3.3",
+    "nesbot/carbon": "^2.66"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.5",
+    "phpunit/phpunit": "*"
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\": "app/"
+      "App\\Services\\": "app/Services/",
+      "App\\Domain\\": "app/Domain/",
+      "Tests\\": "tests"
     }
   },
   "config": {

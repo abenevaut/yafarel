@@ -1,2 +1,25 @@
-[product]
+[yaf]
+; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
+application.baseUri = "/"
+
+session.name = "yaf_session"
+session.domain = ".yaf.test"
+session.lifetime = 1
+session.secure = true
+session.samesite = "strict"
+
+logger.directory = PROJECT_PATH "/logs/log.log"
+; The maximal amount of files to keep (0 means unlimited)
+logger.maxFiles = 5
+; debug, info, notice, warning, error, critical, alert, emergency
+logger.level = notice
+
+[local:yaf]
+logger.level = debug
+
+[production:yaf]
+logger.maxFiles = 0
+
+[testing:yaf]
+logger.level = debug
