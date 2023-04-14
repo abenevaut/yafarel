@@ -25,7 +25,7 @@ trait YafUnit
 
     public function get(string $uri): HttpResponse
     {
-        $request = new Http('/');
+        $request = new Http($uri);
 
         return $this
             ->getApplication()

@@ -9,6 +9,9 @@ class IndexController extends Controller_Abstract
     {
         $this->getView()->content = 'Hello World';
 
-        Log::debug("View content: {$this->getView()->content}");
+        Log::debug("View content: {$this->getView()->content}", [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+        ]);
     }
 }

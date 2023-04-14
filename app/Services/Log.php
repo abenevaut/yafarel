@@ -16,12 +16,32 @@ final class Log
         self::log(__FUNCTION__, $message, $context);
     }
 
-    public static function warn(string $message, array $context = []): void
+    public static function notice(string $message, array $context = []): void
+    {
+        self::log(__FUNCTION__, $message, $context);
+    }
+
+    public static function warning(string $message, array $context = []): void
     {
         self::log(__FUNCTION__, $message, $context);
     }
 
     public static function error(string $message, array $context = []): void
+    {
+        self::log(__FUNCTION__, $message, $context);
+    }
+
+    public static function critical(string $message, array $context = []): void
+    {
+        self::log(__FUNCTION__, $message, $context);
+    }
+
+    public static function alert(string $message, array $context = []): void
+    {
+        self::log(__FUNCTION__, $message, $context);
+    }
+
+    public static function emergency(string $message, array $context = []): void
     {
         self::log(__FUNCTION__, $message, $context);
     }

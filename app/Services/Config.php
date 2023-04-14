@@ -9,11 +9,11 @@ final class Config
 {
     public static function get(string $key): mixed
     {
-        return Application::getConfig()->get($key);
+        return Application::app()->getConfig()->get($key);
     }
 
-    public static function set(string $key, $value): void
+    public static function set(string $key, mixed $value): void
     {
-        Application::getConfig()->set($key, $value);
+        Application::app()->getConfig()->set($key, $value);
     }
 }

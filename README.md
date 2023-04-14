@@ -16,6 +16,9 @@ yaf.use_namespace = On
 yaf.environ = <recommanded: local or testing or production - this choice impact `app.ini` sections>
 ```
 
+## Setup Http server
+See example at https://www.php.net/manual/en/class.yaf-router.php
+
 ## Setup the framework
 ```
 cp app.ini.example app.ini
