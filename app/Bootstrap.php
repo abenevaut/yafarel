@@ -1,11 +1,13 @@
 <?php
 
 use App\Services\Config;
+use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
 use Yaf\Bootstrap_Abstract;
+use Yaf\Dispatcher;
 use Yaf\Loader;
 use Yaf\Registry;
 
@@ -14,6 +16,16 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initAutoload()
     {
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
+    }
+
+    function _initRoute(Dispatcher $dispatcher)
+    {
+        $router = new RESTfulRouter($dispatcher->getRouter());
+        $routes = include(__DIR__ . '/routes.php');
+
+        foreach ($routes as $route) {
+            $router->on(...$route);
+        }
     }
 
     public function _initSession()

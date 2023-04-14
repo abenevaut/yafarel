@@ -20,9 +20,57 @@ trait YafUnit
         return Registry::get('view');
     }
 
-    public function get(string $uri): HttpResponse
+    public function get(string $uri, array $params = []): HttpResponse
     {
         $request = new Http($uri);
+        $request->method = 'get';
+
+        $_GET = array_merge($_GET, $params);
+
+        return $this
+            ->getApplication()
+            ->getDispatcher()
+            ->dispatch($request);
+    }
+
+    public function post(string $uri, array $params = []): HttpResponse
+    {
+        $request = new Http($uri);
+        $request->method = 'post';
+
+        // Force the use of router fallback in testing mode
+        $_POST['_method'] = 'post';
+        $_POST = array_merge($_POST, $params);
+
+        return $this
+            ->getApplication()
+            ->getDispatcher()
+            ->dispatch($request);
+    }
+
+    public function put(string $uri, array $params = []): HttpResponse
+    {
+        $request = new Http($uri);
+        $request->method = 'put';
+
+        // Force the use of router fallback in testing mode
+        $_POST['_method'] = 'put';
+        $_POST = array_merge($_POST, $params);
+
+        return $this
+            ->getApplication()
+            ->getDispatcher()
+            ->dispatch($request);
+    }
+
+    public function delete(string $uri, array $params = []): HttpResponse
+    {
+        $request = new Http($uri);
+        $request->method = 'delete';
+
+        // Force the use of router fallback in testing mode
+        $_POST['_method'] = 'delete';
+        $_POST = array_merge($_POST, $params);
 
         return $this
             ->getApplication()
