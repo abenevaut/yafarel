@@ -17,7 +17,7 @@ final class Environment
         return self::isEnvironment(str_replace('is', '', strtolower(__FUNCTION__)));
     }
 
-    public static function isEnvironment(string $environment): bool
+    private static function isEnvironment(string $environment): bool
     {
         return Application::app()->environ() === $environment
             OR (bool) getenv('APP_ENV') === $environment;

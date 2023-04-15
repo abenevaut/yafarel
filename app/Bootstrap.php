@@ -23,9 +23,16 @@ final class Bootstrap extends Bootstrap_Abstract
 {
     public function _initAutoload()
     {
-        date_default_timezone_set('America/Detroit');
+        date_default_timezone_set('Europe/Paris');
 
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
+    }
+
+    public function _initConfig()
+    {
+        if (!Registry::get('config')) {
+            Registry::set('config', Application::app()->getConfig());
+        }
     }
 
     public function _initRouter(Dispatcher $dispatcher)
@@ -38,16 +45,6 @@ final class Bootstrap extends Bootstrap_Abstract
             foreach ($routes as $route) {
                 $router->on(...$route);
             }
-        }
-    }
-
-    public function _initCommand(Dispatcher $dispatcher)
-    {
-        if ($dispatcher->getRequest()->isCli()) {
-            /** @var array $routes */
-            $commands = include(__DIR__ . '/commands.php');
-
-            $dispatcher->getRouter()->addConfig($commands);
         }
     }
 

@@ -1,19 +1,28 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+define('PROJECT_PATH', dirname(__FILE__));
 
+require PROJECT_PATH . '/vendor/autoload.php';
+
+use App\Console\MigrateCommand;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Console\Application;
+use Yaf\Config\Ini;
+use Yaf\Registry;
 
-$container = new Container;
+if (!Registry::get('config')) {
+    Registry::set('config', new Ini(PROJECT_PATH . '/app.ini', ini_get('yaf.environ')));
+}
+
+$container = new Container();
 $events = new Dispatcher($container);
 
-$artisan = new Application($container, $events, 'Version 1');
-$artisan->setName('My Console App Name');
+$artisan = new Application($container, $events, 'YAF_VERSION');
+$artisan->setName('YAF console');
 
 // Bind a command
-$artisan->resolve(HelloWorld::class);
+$artisan->resolve(MigrateCommand::class);
 
 $artisan->run();
