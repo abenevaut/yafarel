@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\Config;
+use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
 use Monolog\Handler\RotatingFileHandler;
@@ -49,7 +50,16 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initSession(Dispatcher $dispatcher)
     {
-        if (!$dispatcher->getRequest()->isCli() && !Registry::get('session')) {
+        if (
+            (
+                /*
+                 * Session have to be setup for unit tests
+                 */
+                !$dispatcher->getRequest()->isCli()
+                OR !Environment::isProduction()
+            )
+            && !Registry::get('session')
+        ) {
             $session = new Session(
                 Config::get('session.name'),
                 Config::get('session.domain'),

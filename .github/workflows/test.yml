@@ -24,7 +24,7 @@ jobs:
 #        env:
 #          MYSQL_ALLOW_EMPTY_PASSWORD: false
 #          MYSQL_ROOT_PASSWORD: password
-#          MYSQL_DATABASE: yaf-framework.testing
+#          MYSQL_DATABASE: yaf-framework.local
 #        ports:
 #          - 3306/tcp
 #        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -40,7 +40,7 @@ jobs:
         with:
           php-version: ${{ env.php_version }}
           extensions: yaf
-          ini-values: yaf.use_spl_autoload=1, yaf.cache_config=0, yaf.use_namespace=1, yaf.environ=testing
+          ini-values: yaf.use_spl_autoload=1, yaf.cache_config=0, yaf.use_namespace=1, yaf.environ=local
           coverage: pcov
           tools: composer:v2
 

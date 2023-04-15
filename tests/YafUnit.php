@@ -53,7 +53,7 @@ trait YafUnit
         $request = new Http($uri);
         $request->method = $method;
 
-        // Force the use of router fallback in testing mode
+        // Force the use of router fallback during testing
         $_POST['_method'] = $method;
         $_POST = array_merge($_POST, $params);
 
