@@ -35,41 +35,26 @@ trait YafUnit
 
     public function post(string $uri, array $params = []): HttpResponse
     {
-        $request = new Http($uri);
-        $request->method = 'post';
-
-        // Force the use of router fallback in testing mode
-        $_POST['_method'] = 'post';
-        $_POST = array_merge($_POST, $params);
-
-        return $this
-            ->getApplication()
-            ->getDispatcher()
-            ->dispatch($request);
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
     }
 
     public function put(string $uri, array $params = []): HttpResponse
     {
-        $request = new Http($uri);
-        $request->method = 'put';
-
-        // Force the use of router fallback in testing mode
-        $_POST['_method'] = 'put';
-        $_POST = array_merge($_POST, $params);
-
-        return $this
-            ->getApplication()
-            ->getDispatcher()
-            ->dispatch($request);
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
     }
 
     public function delete(string $uri, array $params = []): HttpResponse
     {
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
+    }
+
+    private function dispatchPost(string $method, string $uri, array $params = []): HttpResponse
+    {
         $request = new Http($uri);
-        $request->method = 'delete';
+        $request->method = $method;
 
         // Force the use of router fallback in testing mode
-        $_POST['_method'] = 'delete';
+        $_POST['_method'] = $method;
         $_POST = array_merge($_POST, $params);
 
         return $this
@@ -78,11 +63,11 @@ trait YafUnit
             ->dispatch($request);
     }
 
-    protected function createApplication(): self
+    private function createApplication(string $configFilePath, string $viewsPath): self
     {
         if (!Registry::get('application')) {
-            Registry::set('application', new Application(PROJECT_PATH . '/app.ini'));
-            Registry::set('view', new ViewSimple(PROJECT_PATH . '/app/views'));
+            Registry::set('application', new Application($configFilePath));
+            Registry::set('view', new ViewSimple($viewsPath));
 
             $this->getApplication()->bootstrap();
             $this->getApplication()->getDispatcher()->autoRender(false);

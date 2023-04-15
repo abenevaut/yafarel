@@ -23,6 +23,6 @@ class TestCase extends PHPUnitTestCase implements YafTestCase
     {
         parent::setUp();
 
-        $this->createApplication();
+        $this->createApplication(PROJECT_PATH . '/app.ini', PROJECT_PATH . '/app/views');
     }
 }
