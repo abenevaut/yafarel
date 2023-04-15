@@ -1,5 +1,5 @@
 <?php
 
 return [
-    \App\Console\MigrateCommand::class,
+    \App\Console\ExampleCommand::class,
 ];
