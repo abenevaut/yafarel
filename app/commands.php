@@ -1,13 +1,13 @@
 <?php
 
 return [
-//    'about' => [
-//        'type' => 'rewrite',
-//        'match' => '/cli/index/about',
-//        'route' => [
-//            'module' => 'Cli',
-//            'controller' => 'Index',
-//            'action' => 'about',
-//        ],
-//    ],
+    'about' => [
+        'type' => 'rewrite',
+        'match' => '/cli/about/index',
+        'route' => [
+            'module' => 'Cli',
+            'controller' => 'about',
+            'action' => 'index',
+        ],
+    ],
 ];
