@@ -8,7 +8,7 @@ session.name = "yaf_session"
 session.domain = ".yaf.test"
 session.lifetime = 3600
 session.secure = true
-session.samesite = "strict"
+session.sameSite = "strict"
 
 logger.directory = PROJECT_PATH "/logs/log.log"
 ; The maximal amount of files to keep (0 means unlimited)
