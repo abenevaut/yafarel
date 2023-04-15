@@ -1,10 +1,9 @@
 <?php
 
 use App\Services\Config;
-use App\Services\DB;
-use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
+use Illuminate\Database\Capsule\Manager as EloquentCapsule;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -74,14 +73,18 @@ final class Bootstrap extends Bootstrap_Abstract
         if (!Registry::get('log')) {
             $logger = (new Logger('default'))
                 ->setTimezone(
-                    new \DateTimeZone(date_default_timezone_get())
+                    new \DateTimeZone(Config::get('application.timezone'))
                 )
                 ->pushHandler(
-                    new RotatingFileHandler(
+                    (new RotatingFileHandler(
                         Config::get('logger.directory'),
                         Config::get('logger.maxFiles'),
                         Level::fromName(Config::get('logger.level'))
-                    )
+                    ))
+                    ->setFormatter(new \Monolog\Formatter\LineFormatter(
+                        "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n",
+                        'Y-m-d H:i:s'
+                    ))
                 )
                 ->pushProcessor(function ($record) {
                     $record->extra['sessionId'] = Session::sessionId();
@@ -98,7 +101,15 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initDatabase(Dispatcher $dispatcher)
     {
         if (!Registry::get('db')) {
-            Registry::set('db', new DB(Config::get('database')->toArray()));
+            $capsule = new EloquentCapsule();
+
+            foreach (Config::get('database')->toArray() as $dbName => $config) {
+                $capsule->addConnection($config, $dbName);
+            }
+
+            $capsule->bootEloquent();
+
+            Registry::set('db', $capsule);
         }
     }
 
