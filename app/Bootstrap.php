@@ -4,9 +4,7 @@ use App\Services\Config;
 use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
-use Illuminate\Container\Container as EloquentContainer;
 use Illuminate\Database\Capsule\Manager as EloquentCapsule;
-use Illuminate\Events\Dispatcher as EloquentDispatcher;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -25,6 +23,8 @@ final class Bootstrap extends Bootstrap_Abstract
 {
     public function _initAutoload()
     {
+        date_default_timezone_set('America/Detroit');
+
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
     }
 
@@ -103,7 +103,7 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initDatabase(Dispatcher $dispatcher)
     {
         if (!Registry::get('db')) {
-            $capsule = new EloquentCapsule;
+            $capsule = new EloquentCapsule();
 
 //            $capsule->addConnection(
 //                [
@@ -125,17 +125,7 @@ final class Bootstrap extends Bootstrap_Abstract
                 'prefix' => '',
             ]);
 
-            // Set the event dispatcher used by Eloquent models... (optional)
-//            $capsule->setEventDispatcher(new EloquentDispatcher(new EloquentContainer));
-
-            // Set the cache manager instance used by connections... (optional)
-            // $capsule->setCacheManager(...);
-
-            // Make this Capsule instance available globally via static methods... (optional)
-//            $capsule->setAsGlobal();
-
-            // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-//            $capsule->bootEloquent();
+            $capsule->bootEloquent();
 
             Registry::set('db', $capsule);
         }
