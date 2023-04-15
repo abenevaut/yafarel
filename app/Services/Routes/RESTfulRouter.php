@@ -30,8 +30,7 @@ final class RESTfulRouter
                         'controller' => $controller,
                         'action' => $action,
                         'method' => $method
-                    ],
-                    $this->strict
+                    ]
                 )
             );
     }

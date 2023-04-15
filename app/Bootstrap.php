@@ -77,6 +77,11 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initPlugin(Dispatcher $dispatcher)
     {
-        $dispatcher->registerPlugin(new DisallowFrameEmbeddingPlugin());
+        if (!$dispatcher->getRequest()->isCli()) {
+            $middlewares = include(__DIR__ . '/middlewares.php');
+            foreach ($middlewares as $middleware) {
+                $dispatcher->registerPlugin(new $middleware);
+            }
+        }
     }
 }
