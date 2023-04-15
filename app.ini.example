@@ -26,6 +26,7 @@ logger.level = debug
 logger.maxFiles = 0
 
 [testing:yaf]
+logger.maxFiles = 1
 logger.level = debug
 
 database.default.driver = "sqlite"
