@@ -12,7 +12,7 @@ trait YafUnit
 {
     public function getApplication(): Application
     {
-        return Registry::get('application');
+        return Registry::get('app');
     }
 
     public function getView(): ViewSimple
@@ -65,8 +65,8 @@ trait YafUnit
 
     private function createApplication(string $configFilePath, string $viewsPath): self
     {
-        if (!Registry::get('application')) {
-            Registry::set('application', new Application($configFilePath));
+        if (!Registry::get('app')) {
+            Registry::set('app', new Application($configFilePath));
             Registry::set('view', new ViewSimple($viewsPath));
 
             $this->getApplication()->bootstrap();
