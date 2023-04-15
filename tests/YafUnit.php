@@ -20,9 +20,12 @@ trait YafUnit
         return Registry::get('view');
     }
 
-    public function get(string $uri): HttpResponse
+    public function get(string $uri, array $params = []): HttpResponse
     {
         $request = new Http($uri);
+        $request->method = 'get';
+
+        $_GET = array_merge($_GET, $params);
 
         return $this
             ->getApplication()
@@ -30,11 +33,41 @@ trait YafUnit
             ->dispatch($request);
     }
 
-    protected function createApplication(): self
+    public function post(string $uri, array $params = []): HttpResponse
+    {
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
+    }
+
+    public function put(string $uri, array $params = []): HttpResponse
+    {
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
+    }
+
+    public function delete(string $uri, array $params = []): HttpResponse
+    {
+        return $this->dispatchPost(__FUNCTION__, $uri, $params);
+    }
+
+    private function dispatchPost(string $method, string $uri, array $params = []): HttpResponse
+    {
+        $request = new Http($uri);
+        $request->method = $method;
+
+        // Force the use of router fallback during testing
+        $_POST['_method'] = $method;
+        $_POST = array_merge($_POST, $params);
+
+        return $this
+            ->getApplication()
+            ->getDispatcher()
+            ->dispatch($request);
+    }
+
+    private function createApplication(string $configFilePath, string $viewsPath): self
     {
         if (!Registry::get('application')) {
-            Registry::set('application', new Application(PROJECT_PATH . '/app.ini'));
-            Registry::set('view', new ViewSimple(PROJECT_PATH . '/app/views'));
+            Registry::set('application', new Application($configFilePath));
+            Registry::set('view', new ViewSimple($viewsPath));
 
             $this->getApplication()->bootstrap();
             $this->getApplication()->getDispatcher()->autoRender(false);

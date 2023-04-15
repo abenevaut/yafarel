@@ -2,10 +2,11 @@
 ; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
+application.modules = "Index,Cli"
 
 session.name = "yaf_session"
 session.domain = ".yaf.test"
-session.lifetime = 1
+session.lifetime = 3600
 session.secure = true
 session.samesite = "strict"
 
@@ -20,6 +21,3 @@ logger.level = debug
 
 [production:yaf]
 logger.maxFiles = 0
-
-[testing:yaf]
-logger.level = debug
