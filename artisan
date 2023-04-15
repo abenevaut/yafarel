@@ -22,7 +22,10 @@ $events = new Dispatcher($container);
 $artisan = new Application($container, $events, 'YAF_VERSION');
 $artisan->setName('YAF console');
 
-// Bind a command
-$artisan->resolve(MigrateCommand::class);
+$commands = include(PROJECT_PATH . '/app/commands.php');
+
+foreach ($commands as $command) {
+    $artisan->resolve($command);
+}
 
 $artisan->run();
