@@ -4,6 +4,9 @@ use App\Services\Config;
 use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
+use Illuminate\Container\Container as EloquentContainer;
+use Illuminate\Database\Capsule\Manager as EloquentCapsule;
+use Illuminate\Events\Dispatcher as EloquentDispatcher;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -94,6 +97,47 @@ final class Bootstrap extends Bootstrap_Abstract
                 });
 
             Registry::set('log', $logger);
+        }
+    }
+
+    public function _initDatabase(Dispatcher $dispatcher)
+    {
+        if (!Registry::get('db')) {
+            $capsule = new EloquentCapsule;
+
+//            $capsule->addConnection(
+//                [
+//                    'driver'    => 'mysql',
+//                    'host'      => 'localhost',
+//                    'database'  => 'illuminate_non_laravel',
+//                    'username'  => 'root',
+//                    'password'  => '',
+//                    'charset'   => 'utf8',
+//                    'collation' => 'utf8_unicode_ci',
+//                    'prefix'    => '',
+//                ],
+//                'mysql'
+//            );
+
+            $capsule->addConnection([
+                'driver'    => 'sqlite',
+                'database' => PROJECT_PATH . '/database.sqlite',
+                'prefix' => '',
+            ]);
+
+            // Set the event dispatcher used by Eloquent models... (optional)
+//            $capsule->setEventDispatcher(new EloquentDispatcher(new EloquentContainer));
+
+            // Set the cache manager instance used by connections... (optional)
+            // $capsule->setCacheManager(...);
+
+            // Make this Capsule instance available globally via static methods... (optional)
+//            $capsule->setAsGlobal();
+
+            // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+//            $capsule->bootEloquent();
+
+            Registry::set('db', $capsule);
         }
     }
 

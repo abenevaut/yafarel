@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
-        colors="true"
-        cacheDirectory=".phpunit.cache"
->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" colors="true" cacheDirectory=".phpunit.cache">
   <testsuites>
     <testsuite name="Unit">
       <directory suffix="Test.php">./tests/Unit</directory>
@@ -14,15 +9,17 @@
     </testsuite>
   </testsuites>
   <coverage>
-    <include>
-      <directory suffix=".php">./app</directory>
-    </include>
     <report>
       <clover outputFile="coverage/clover.xml"/>
     </report>
   </coverage>
-      <php>
-        <ini name="yaf.environ" value="local" />
-        <env name="APP_ENV" value="local"/>
-      </php>
+  <php>
+    <ini name="yaf.environ" value="local"/>
+    <env name="APP_ENV" value="local"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+  </source>
 </phpunit>
