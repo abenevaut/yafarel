@@ -87,6 +87,7 @@ final class Bootstrap extends Bootstrap_Abstract
                     )
                 )
                 ->pushProcessor(function ($record) {
+                    $record->extra['sessionId'] = Session::sessionId();
                     $record->extra['userId'] = Session::userId();
                     $record->extra['hit'] = uniqid();
 

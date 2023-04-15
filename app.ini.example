@@ -2,6 +2,7 @@
 ; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
+application.modules = "Index,Cli"
 
 session.name = "yaf_session"
 session.domain = ".yaf.test"
