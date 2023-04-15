@@ -2,6 +2,7 @@
 ; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
+application.timezone = "UTC"
 
 session.name = "yaf_session"
 session.domain = ".yaf.test"
@@ -14,6 +15,9 @@ logger.directory = PROJECT_PATH "/logs/log.log"
 logger.maxFiles = 5
 ; debug, info, notice, warning, error, critical, alert, emergency
 logger.level = notice
+
+database.default.driver = "sqlite"
+database.default.database = PROJECT_PATH . '/database.sqlite'
 
 [local:yaf]
 logger.level = debug

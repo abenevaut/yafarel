@@ -25,6 +25,24 @@ cp app.ini.example app.ini
 composer install
 ```
 
+### Setup the database
+#### MySQL
+```
+// <string: db name> could be "default" or "whatever"
+database.<db name>.driver = "mysql"
+database.<db name>.host = "<host>"
+database.<db name>.database = "<database>"
+database.<db name>.username = "<username>"
+database.<db name>.password = "<password>"
+```
+
+#### SQLite
+```
+// <string: db name> could be "default" or "whatever"
+database.<db name>.driver = "mysql"
+database.<db name>.database = "<path to database.sqlite>"
+```
+
 ## Command line interface
 ```
 php artisan "request_uri=/<controller>/<method>"

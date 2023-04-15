@@ -32,7 +32,7 @@ final class Session
         return (int) self::getInstance()->get('userId');
     }
 
-    public function start(): void
+    public function start(): self
     {
         if (session_status() === PHP_SESSION_NONE) {
 
@@ -49,6 +49,8 @@ final class Session
 
             YafSession::getInstance()->start();
         }
+
+        return $this;
     }
 
     public function destroy(): void

@@ -1,10 +1,10 @@
 <?php
 
 use App\Services\Config;
+use App\Services\DB;
 use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
-use Illuminate\Database\Capsule\Manager as EloquentCapsule;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -24,8 +24,6 @@ final class Bootstrap extends Bootstrap_Abstract
 {
     public function _initAutoload()
     {
-        date_default_timezone_set('Europe/Paris');
-
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
     }
 
@@ -51,35 +49,33 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initSession(Dispatcher $dispatcher)
     {
-        if (
-            (
-                /*
-                 * Session have to be setup for unit tests
-                 */
-                !$dispatcher->getRequest()->isCli()
-                OR !Environment::isProduction()
-            )
-            && !Registry::get('session')
-        ) {
-            $session = new Session(
+        if (!Registry::get('session')) {
+            $session = (new Session(
                 Config::get('session.name'),
                 Config::get('session.domain'),
                 Config::get('application.baseUri'),
                 Config::get('session.lifetime'),
                 Config::get('session.secure'),
-                Config::get('session.samesite')
-            );
-
-            $session->start();
+                Config::get('session.sameSite')
+            ))
+                ->start();
 
             Registry::set('session', $session);
         }
+    }
+
+    public function _initTimezone()
+    {
+        date_default_timezone_set(Config::get('application.timezone'));
     }
 
     public function _initLogger()
     {
         if (!Registry::get('log')) {
             $logger = (new Logger('default'))
+                ->setTimezone(
+                    new \DateTimeZone(date_default_timezone_get())
+                )
                 ->pushHandler(
                     new RotatingFileHandler(
                         Config::get('logger.directory'),
@@ -102,31 +98,7 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initDatabase(Dispatcher $dispatcher)
     {
         if (!Registry::get('db')) {
-            $capsule = new EloquentCapsule();
-
-//            $capsule->addConnection(
-//                [
-//                    'driver'    => 'mysql',
-//                    'host'      => 'localhost',
-//                    'database'  => 'illuminate_non_laravel',
-//                    'username'  => 'root',
-//                    'password'  => '',
-//                    'charset'   => 'utf8',
-//                    'collation' => 'utf8_unicode_ci',
-//                    'prefix'    => '',
-//                ],
-//                'mysql'
-//            );
-
-            $capsule->addConnection([
-                'driver'    => 'sqlite',
-                'database' => PROJECT_PATH . '/database.sqlite',
-                'prefix' => '',
-            ]);
-
-            $capsule->bootEloquent();
-
-            Registry::set('db', $capsule);
+            Registry::set('db', new DB(Config::get('database')->toArray()));
         }
     }
 
