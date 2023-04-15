@@ -109,6 +109,10 @@ final class Bootstrap extends Bootstrap_Abstract
 
             $capsule->bootEloquent();
 
+            if (!\App\Services\Environment::isProduction()) {
+                \Illuminate\Database\Eloquent\Model::preventLazyLoading();
+            }
+
             Registry::set('db', $capsule);
         }
     }

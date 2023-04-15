@@ -24,3 +24,9 @@ logger.level = debug
 
 [production:yaf]
 logger.maxFiles = 0
+
+[testing:yaf]
+logger.level = debug
+
+database.default.driver = "sqlite"
+database.default.database = PROJECT_PATH . '/tests/database.sqlite'
