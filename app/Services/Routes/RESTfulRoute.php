@@ -34,7 +34,6 @@ final class RESTfulRoute implements Route_Interface
      */
     public function route($request): bool
     {
-        // HTTP method adapt
         if ($this->method !== '*') {
             $method = strtolower($request->getMethod());
 

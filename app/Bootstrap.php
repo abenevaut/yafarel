@@ -26,18 +26,30 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initRoute(Dispatcher $dispatcher)
     {
-        $router = new RESTfulRouter($dispatcher->getRouter());
-        /** @var array $routes */
-        $routes = include(__DIR__ . '/routes.php');
+        if (!$dispatcher->getRequest()->isCli()) {
+            $router = new RESTfulRouter($dispatcher->getRouter());
+            /** @var array $routes */
+            $routes = include(__DIR__ . '/routes.php');
 
-        foreach ($routes as $route) {
-            $router->on(...$route);
+            foreach ($routes as $route) {
+                $router->on(...$route);
+            }
         }
     }
 
-    public function _initSession()
+    public function _initCommand(Dispatcher $dispatcher)
     {
-        if (!Registry::get('session')) {
+        if ($dispatcher->getRequest()->isCli()) {
+            /** @var array $routes */
+            $commands = include(__DIR__ . '/commands.php');
+
+            $dispatcher->getRouter()->addConfig($commands);
+        }
+    }
+
+    public function _initSession(Dispatcher $dispatcher)
+    {
+        if (!$dispatcher->getRequest()->isCli() && !Registry::get('session')) {
             $session = new Session(
                 Config::get('session.name'),
                 Config::get('session.domain'),
@@ -77,11 +89,9 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initPlugin(Dispatcher $dispatcher)
     {
-        if (!$dispatcher->getRequest()->isCli()) {
-            $middlewares = include(__DIR__ . '/middlewares.php');
-            foreach ($middlewares as $middleware) {
-                $dispatcher->registerPlugin(new $middleware);
-            }
+        $middlewares = include(__DIR__ . '/middlewares.php');
+        foreach ($middlewares as $middleware) {
+            $dispatcher->registerPlugin(new $middleware);
         }
     }
 }
