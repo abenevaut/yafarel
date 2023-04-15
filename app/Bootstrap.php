@@ -11,6 +11,12 @@ use Yaf\Dispatcher;
 use Yaf\Loader;
 use Yaf\Registry;
 
+/**
+ * Class Bootstrap
+ *
+ * \Yaf\Application::bootstrap() will call all _init* methods defined in Bootstrap top to down.
+ * Be free to add your own _init* methods.
+ */
 final class Bootstrap extends Bootstrap_Abstract
 {
     public function _initAutoload()
@@ -18,9 +24,10 @@ final class Bootstrap extends Bootstrap_Abstract
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
     }
 
-    function _initRoute(Dispatcher $dispatcher)
+    public function _initRoute(Dispatcher $dispatcher)
     {
         $router = new RESTfulRouter($dispatcher->getRouter());
+        /** @var array $routes */
         $routes = include(__DIR__ . '/routes.php');
 
         foreach ($routes as $route) {
@@ -68,7 +75,7 @@ final class Bootstrap extends Bootstrap_Abstract
         }
     }
 
-    public function _initPlugin(\Yaf\Dispatcher $dispatcher)
+    public function _initPlugin(Dispatcher $dispatcher)
     {
         $dispatcher->registerPlugin(new DisallowFrameEmbeddingPlugin());
     }
