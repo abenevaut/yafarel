@@ -31,6 +31,11 @@ php artisan "request_uri=/<controller>/<method>"
 php artisan "request_uri=/<module>/<controller>/<method>"
 ```
 
+### Commands list
+```
+php artisan request_uri="/cli/about/index"
+```
+
 ## Testing
 ```
 vendor/bin/phpunit

@@ -25,7 +25,7 @@ final class Bootstrap extends Bootstrap_Abstract
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
     }
 
-    public function _initRoute(Dispatcher $dispatcher)
+    public function _initRouter(Dispatcher $dispatcher)
     {
         if (!$dispatcher->getRequest()->isCli()) {
             $router = new RESTfulRouter($dispatcher->getRouter());
