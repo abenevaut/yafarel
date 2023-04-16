@@ -51,9 +51,7 @@ describe 'Dockerfile.yaf' do
       expect(subject.stdout).to match(/yaf support => enabled/)
       expect(subject.stdout).to match(/yaf.use_namespace => 1 => 1/)
       expect(subject.stdout).to match(/yaf.use_spl_autoload => 1 => 1/)
-#       expect(subject.stdout).to match(/yaf.cache_config => 1 => 1/)
       expect(subject.stdout).to match(/yaf.environ => production => production/)
     end
   end
-
 end
