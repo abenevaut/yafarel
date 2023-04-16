@@ -1,0 +1,6 @@
+[yaf]
+extension=yaf.so
+yaf.use_spl_autoload=On
+yaf.cache_config=On
+yaf.use_namespace=On
+yaf.environ=production

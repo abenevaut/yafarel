@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# this hooks push the latest tag built buy docker hub as `latest` tag.
-# see also [docker-hub/builds/advanced](https://docs.docker.com/docker-hub/builds/advanced)
-
-docker tag $IMAGE_NAME $DOCKER_REPO:latest
-docker push $DOCKER_REPO:latest

@@ -8,4 +8,4 @@ RUN pecl channel-update pecl.php.net \
 
 RUN docker-php-ext-enable yaf
 
-COPY runtime/php.ini.production /usr/local/etc/php/php.ini
+COPY runtime/docker-php-ext-yaf.ini.production /usr/local/etc/php/conf.d/docker-php-ext-yaf.ini
