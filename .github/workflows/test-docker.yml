@@ -36,7 +36,7 @@ jobs:
           docker run --rm -i hadolint/hadolint < Dockerfile.yaf
           docker run --rm -i hadolint/hadolint < Dockerfile.ci
       - name: Build docker images with rspec tag for tests
-        run:
+        run: |
           docker pull abenevaut/yaf-framework:latest-php${{ env.php_version }}
           docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework:rspec --cache-from abenevaut/yaf-framework:latest-php${{ env.php_version }}
           docker pull abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
