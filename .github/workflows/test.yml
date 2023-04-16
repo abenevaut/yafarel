@@ -12,7 +12,7 @@ env:
 jobs:
 
   test:
-    runs-on: abenevaut/yaf-framework-ci:latest-php81
+    runs-on: ubuntu-latest
     concurrency:
       group: test-${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
