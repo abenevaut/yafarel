@@ -3,14 +3,15 @@
 require 'docker'
 require 'serverspec'
 
-describe 'Dockerfile' do
+describe 'Dockerfile.yaf' do
   before(:all) do # rubocop:disable RSpec/BeforeAfterAll
     ::Docker.options[:read_timeout] = 3000
 
     image = ::Docker::Image.build_from_dir(
       '.',
-      't' => 'abenevaut/yaf-framework-ci:rspec',
-      'cache-from' => 'abenevaut/yaf-framework-ci:latest'
+      'dockerfile' => 'Dockerfile.yaf',
+      't' => 'abenevaut/yaf-framework:rspec',
+      'cache-from' => 'abenevaut/yaf-framework:latest'
     )
 
     set :os, family: :alpine
@@ -33,23 +34,22 @@ describe 'Dockerfile' do
     end
   end
 
-  describe package('openssh-client-common') do
-    it { is_expected.to be_installed }
+  describe command('php --version') do
+    it 'confirm php version' do
+      expect(subject.stdout).to match(/PHP 8.1.13/)
+    end
   end
 
-  describe package('sshpass') do
-    it { is_expected.to be_installed }
+  describe command('php -m') do
+    it 'confirm php modules' do
+      expect(subject.stdout).to match(/yaf/)
+    end
   end
 
-  describe package('python3') do
-    it { is_expected.to be_installed }
+  describe command('php -r "phpinfo();"') do
+    it 'confirm phpinfo' do
+      expect(subject.stdout).to match(/Yaf Support => enabled/)
+    end
   end
 
-  describe package('py-pip') do
-    it { is_expected.to be_installed }
-  end
-
-  it 'installs docker-compose' do
-    expect(docker_compose_version).to include('docker-compose version 1.29.2')
-  end
 end

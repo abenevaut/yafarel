@@ -1,0 +1,9 @@
+FROM laravelphp/vapor:php81
+
+LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
+
+RUN pecl channel-update pecl.php.net \
+    && pecl install yaf \
+    && rm -rf /tmp/pear
+
+RUN docker-php-ext-enable yaf
