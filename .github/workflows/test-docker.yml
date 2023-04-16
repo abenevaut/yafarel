@@ -30,15 +30,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: lint docker file
+      - name: lint docker files
         run: |
           docker pull hadolint/hadolint
           docker run --rm -i hadolint/hadolint < Dockerfile.yaf
           docker run --rm -i hadolint/hadolint < Dockerfile.ci
-      - name: Build docker image with rspec tag for tests
-        run: |
-          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework:rspec
-          docker build . --file Dockerfile.ci --tag abenevaut/yaf-framework-ci:rspec
+      - name: Build docker images with rspec tag for tests
+        run:
+          docker pull abenevaut/yaf-framework:latest-php${{ env.php_version }}
+          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework:rspec --cache-from abenevaut/yaf-framework:latest-php${{ env.php_version }}
+          docker pull abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
+          docker build . --file Dockerfile.ci --tag abenevaut/yaf-framework-ci:rspec --cache-from abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
 
   tests:
     runs-on: ubuntu-latest
