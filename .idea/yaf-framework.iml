@@ -57,6 +57,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/simple-cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/build_info" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/gems" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bundle/specifications" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

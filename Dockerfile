@@ -1,0 +1,24 @@
+FROM laravelphp/vapor:php81
+
+LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
+
+# alpine v3.16 - https://pkgs.alpinelinux.org/packages
+RUN apk add --no-cache \
+    python3=3.10.11-r0 \
+    python3-dev=3.10.11-r0 \
+    build-base=0.5-r3 \
+    libffi-dev=3.4.2-r1 \
+    openssl-dev=1.1.1t-r2 \
+    libgcc=11.2.1_git20220219-r2 \
+    py3-pip=22.1.1-r0 \
+    openssh-client-common=9.0_p1-r2 \
+    sshpass=1.09-r0
+
+# https://pypi.org/project/docker-compose/
+RUN pip install --no-cache-dir docker-compose==1.29.2
+
+RUN pecl channel-update pecl.php.net \
+    && pecl install yaf \
+    && rm -rf /tmp/pear
+
+RUN docker-php-ext-enable yaf
