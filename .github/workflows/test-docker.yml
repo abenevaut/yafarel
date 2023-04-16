@@ -1,6 +1,17 @@
 name: test-docker
 
 on:
+  push:
+    branches: [ master ]
+    paths:
+      - Dockerfile.yaf
+      - Dockerfile.ci
+      - runtime
+      - spec
+      - .rspec
+      - .rubocop.yml
+      - Gemfile
+      - .Gemfile.lock
   pull_request:
     branches: [ master ]
     paths:
@@ -23,11 +34,11 @@ jobs:
         run: |
           docker pull hadolint/hadolint
           docker run --rm -i hadolint/hadolint < Dockerfile.yaf
-#          docker run --rm -i hadolint/hadolint < Dockerfile.ci
-      - name: Build docker image
+          docker run --rm -i hadolint/hadolint < Dockerfile.ci
+      - name: Build docker image with rspec tag for tests
         run: |
-          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework:tests
-#          docker build . --file Dockerfile.ci --tag abenevaut/yaf-framework-ci:tests
+          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework:rspec
+          docker build . --file Dockerfile.ci --tag abenevaut/yaf-framework-ci:rspec
 
   tests:
     runs-on: ubuntu-latest
@@ -42,7 +53,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - run: |
+      - name: Run tests on docker image with rspec tag
+        run: |
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
