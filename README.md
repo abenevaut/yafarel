@@ -10,10 +10,10 @@ This is a simple YAF framework to start a new project.
 ;
 ; https://www.php.net/manual/fr/yaf.configuration.php
 ;
-yaf.use_spl_autoload = On
-yaf.cache_config = <On / Off>
-yaf.use_namespace = On
-yaf.environ = <recommanded: local or production - this choice impact `app.ini` sections>
+yaf.use_spl_autoload=On
+yaf.cache_config=<On / Off>
+yaf.use_namespace=On
+yaf.environ=<recommanded: local or production - this choice impact `app.ini` sections>
 ```
 
 ## Setup Http server
