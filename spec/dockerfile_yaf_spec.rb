@@ -19,10 +19,6 @@ describe 'Dockerfile.yaf' do
     set :docker_image, image.id
   end
 
-  def docker_compose_version
-    command('docker-compose -v').stdout
-  end
-
   describe file('/etc/os-release') do
     it { is_expected.to be_file }
   end
