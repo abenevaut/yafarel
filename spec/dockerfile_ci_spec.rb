@@ -42,4 +42,20 @@
 #   it 'installs docker-compose' do
 #     expect(docker_compose_version).to include('docker-compose version 1.29.2')
 #   end
+#
+#   describe command('php -m') do
+#     it 'confirm php modules' do
+#       expect(subject.stdout).to match(/yaf/)
+#     end
+#   end
+#
+#   describe command('php -r "phpinfo();"') do
+#     it 'confirm phpinfo' do
+#       expect(subject.stdout).to match(/yaf support => enabled/)
+#       expect(subject.stdout).to match(/yaf.use_namespace => 1 => 1/)
+#       expect(subject.stdout).to match(/yaf.use_spl_autoload => 1 => 1/)
+#       #expect(subject.stdout).to match(/yaf.cache_config => 0 => 0/)
+#       expect(subject.stdout).to match(/yaf.environ => testing => testing/)
+#     end
+#   end
 # end

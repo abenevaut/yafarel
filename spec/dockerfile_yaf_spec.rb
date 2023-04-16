@@ -36,7 +36,7 @@ describe 'Dockerfile.yaf' do
 
   describe command('php --version') do
     it 'confirm php version' do
-      expect(subject.stdout).to match(/PHP 8.1.13/)
+      expect(subject.stdout).to match(/PHP 8.1.12/)
     end
   end
 
@@ -48,7 +48,11 @@ describe 'Dockerfile.yaf' do
 
   describe command('php -r "phpinfo();"') do
     it 'confirm phpinfo' do
-      expect(subject.stdout).to match(/Yaf Support => enabled/)
+      expect(subject.stdout).to match(/yaf support => enabled/)
+      expect(subject.stdout).to match(/yaf.use_namespace => 1 => 1/)
+      expect(subject.stdout).to match(/yaf.use_spl_autoload => 1 => 1/)
+#       expect(subject.stdout).to match(/yaf.cache_config => 1 => 1/)
+      expect(subject.stdout).to match(/yaf.environ => production => production/)
     end
   end
 

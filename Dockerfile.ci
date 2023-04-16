@@ -17,6 +17,8 @@ RUN apk add --no-cache \
 # https://pypi.org/project/docker-compose/
 RUN pip install --no-cache-dir docker-compose==1.29.2
 
+COPY runtime/php.ini.testing /usr/local/etc/php/php.ini
+
 #
 # Install your application dependencies here
 #
