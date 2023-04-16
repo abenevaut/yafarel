@@ -3,6 +3,15 @@ name: test-docker
 on:
   pull_request:
     branches: [ master ]
+    paths:
+      - Dockerfile.yaf
+      - Dockerfile.ci
+      - runtime
+      - spec
+      - .rspec
+      - .rubocop.yml
+      - Gemfile
+      - .Gemfile.lock
 
 jobs:
 
@@ -30,7 +39,7 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
       - run: |
