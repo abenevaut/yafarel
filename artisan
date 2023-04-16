@@ -1,11 +1,31 @@
-#!/bin/php
+#!/usr/bin/env php
 <?php
 
-set_time_limit(0);
+define('PROJECT_PATH', dirname(__FILE__));
 
-define('PROJECT_PATH', getcwd());
+require PROJECT_PATH . '/vendor/autoload.php';
 
-(new \Yaf\Application(PROJECT_PATH . '/app.ini'))
-    ->bootstrap()
-    ->getDispatcher()
-    ->dispatch(new \Yaf\Request\Simple());
+use Illuminate\Database\Console\Migrations\MigrateCommand;
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Console\Application;
+use Yaf\Config\Ini;
+use Yaf\Registry;
+
+if (!Registry::get('config')) {
+    Registry::set('config', new Ini(PROJECT_PATH . '/app.ini', ini_get('yaf.environ')));
+}
+
+$container = new Container();
+$events = new Dispatcher($container);
+
+$artisan = new Application($container, $events, 'YAF_VERSION');
+$artisan->setName('YAF console');
+
+$commands = include(PROJECT_PATH . '/app/commands.php');
+
+foreach ($commands as $command) {
+    $artisan->resolve($command);
+}
+
+$artisan->run();

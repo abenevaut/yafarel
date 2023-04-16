@@ -1,15 +1,13 @@
 <?php
 
 use App\Services\Config;
-use App\Services\Environment;
 use App\Services\Routes\RESTfulRouter;
 use App\Services\Session;
-use Illuminate\Container\Container as EloquentContainer;
 use Illuminate\Database\Capsule\Manager as EloquentCapsule;
-use Illuminate\Events\Dispatcher as EloquentDispatcher;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
+use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
 use Yaf\Loader;
@@ -28,6 +26,13 @@ final class Bootstrap extends Bootstrap_Abstract
         Loader::getInstance()->import(PROJECT_PATH . '/vendor/autoload.php');
     }
 
+    public function _initConfig()
+    {
+        if (!Registry::get('config')) {
+            Registry::set('config', Application::app()->getConfig());
+        }
+    }
+
     public function _initRouter(Dispatcher $dispatcher)
     {
         if (!$dispatcher->getRequest()->isCli()) {
@@ -41,55 +46,48 @@ final class Bootstrap extends Bootstrap_Abstract
         }
     }
 
-    public function _initCommand(Dispatcher $dispatcher)
-    {
-        if ($dispatcher->getRequest()->isCli()) {
-            /** @var array $routes */
-            $commands = include(__DIR__ . '/commands.php');
-
-            $dispatcher->getRouter()->addConfig($commands);
-        }
-    }
-
     public function _initSession(Dispatcher $dispatcher)
     {
-        if (
-            (
-                /*
-                 * Session have to be setup for unit tests
-                 */
-                !$dispatcher->getRequest()->isCli()
-                OR !Environment::isProduction()
-            )
-            && !Registry::get('session')
-        ) {
-            $session = new Session(
+        if (!Registry::get('session')) {
+            $session = (new Session(
                 Config::get('session.name'),
                 Config::get('session.domain'),
                 Config::get('application.baseUri'),
                 Config::get('session.lifetime'),
                 Config::get('session.secure'),
-                Config::get('session.samesite')
-            );
-
-            $session->start();
+                Config::get('session.sameSite')
+            ))
+                ->start();
 
             Registry::set('session', $session);
         }
+    }
+
+    public function _initTimezone()
+    {
+        date_default_timezone_set(Config::get('application.timezone'));
     }
 
     public function _initLogger()
     {
         if (!Registry::get('log')) {
             $logger = (new Logger('default'))
+                ->setTimezone(
+                    new \DateTimeZone(Config::get('application.timezone'))
+                )
                 ->pushHandler(
-                    new RotatingFileHandler(
+                    (new RotatingFileHandler(
                         Config::get('logger.directory'),
                         Config::get('logger.maxFiles'),
                         Level::fromName(Config::get('logger.level'))
-                    )
+                    ))
+                    ->setFormatter(new \Monolog\Formatter\LineFormatter(
+                        "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n",
+                        'Y-m-d H:i:s'
+                    ))
                 )
                 ->pushProcessor(function ($record) {
+                    $record->extra['sessionId'] = Session::sessionId();
                     $record->extra['userId'] = Session::userId();
                     $record->extra['hit'] = uniqid();
 
@@ -103,39 +101,17 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initDatabase(Dispatcher $dispatcher)
     {
         if (!Registry::get('db')) {
-            $capsule = new EloquentCapsule;
+            $capsule = new EloquentCapsule();
 
-//            $capsule->addConnection(
-//                [
-//                    'driver'    => 'mysql',
-//                    'host'      => 'localhost',
-//                    'database'  => 'illuminate_non_laravel',
-//                    'username'  => 'root',
-//                    'password'  => '',
-//                    'charset'   => 'utf8',
-//                    'collation' => 'utf8_unicode_ci',
-//                    'prefix'    => '',
-//                ],
-//                'mysql'
-//            );
+            foreach (Config::get('database')->toArray() as $dbName => $config) {
+                $capsule->addConnection($config, $dbName);
+            }
 
-            $capsule->addConnection([
-                'driver'    => 'sqlite',
-                'database' => PROJECT_PATH . '/database.sqlite',
-                'prefix' => '',
-            ]);
+            $capsule->bootEloquent();
 
-            // Set the event dispatcher used by Eloquent models... (optional)
-//            $capsule->setEventDispatcher(new EloquentDispatcher(new EloquentContainer));
-
-            // Set the cache manager instance used by connections... (optional)
-            // $capsule->setCacheManager(...);
-
-            // Make this Capsule instance available globally via static methods... (optional)
-//            $capsule->setAsGlobal();
-
-            // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-//            $capsule->bootEloquent();
+            if (!\App\Services\Environment::isProduction()) {
+                \Illuminate\Database\Eloquent\Model::preventLazyLoading();
+            }
 
             Registry::set('db', $capsule);
         }

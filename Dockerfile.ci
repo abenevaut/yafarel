@@ -1,4 +1,4 @@
-FROM abenevaut/yaf-framework:latest-php81
+FROM abenevaut/yafarel:latest-php81
 
 LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
 

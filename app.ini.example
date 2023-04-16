@@ -2,13 +2,13 @@
 ; https://www.php.net/manual/fr/yaf.appconfig.php
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
-application.modules = "Index,Cli"
+application.timezone = "UTC"
 
 session.name = "yaf_session"
 session.domain = ".yaf.test"
 session.lifetime = 3600
 session.secure = true
-session.samesite = "strict"
+session.sameSite = "strict"
 
 logger.directory = PROJECT_PATH "/logs/log.log"
 ; The maximal amount of files to keep (0 means unlimited)
@@ -16,8 +16,18 @@ logger.maxFiles = 5
 ; debug, info, notice, warning, error, critical, alert, emergency
 logger.level = notice
 
+database.default.driver = "sqlite"
+database.default.database = PROJECT_PATH . '/database.sqlite'
+
 [local:yaf]
 logger.level = debug
 
 [production:yaf]
 logger.maxFiles = 0
+
+[testing:yaf]
+logger.maxFiles = 1
+logger.level = debug
+
+database.default.driver = "sqlite"
+database.default.database = PROJECT_PATH . '/tests/database.sqlite'

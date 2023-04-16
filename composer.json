@@ -1,5 +1,5 @@
 {
-  "name": "abenevaut/yaf-framework",
+  "name": "abenevaut/yafarel",
   "type": "project",
   "description": "Yet another YAF framework",
   "keywords": [
@@ -10,7 +10,9 @@
   "require": {
     "php": "^8.1",
     "ext-yaf": "^3.1",
+    "illuminate/console": "^10.7",
     "illuminate/database": "^10.7",
+    "illuminate/events": "^10.7",
     "monolog/monolog": "^3.3",
     "nesbot/carbon": "^2.66"
   },
@@ -20,8 +22,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\Services\\": "app/Services/",
+      "App\\Console\\": "app/Console/",
       "App\\Domain\\": "app/Domain/",
+      "App\\Services\\": "app/Services/",
       "Tests\\": "tests"
     }
   },

@@ -25,15 +25,36 @@ cp app.ini.example app.ini
 composer install
 ```
 
+### Setup the database
+
+Note that you can have multiple database connections.
+The main one should be named `default`.
+
+#### MySQL
+```
+database.<db name>.driver = "mysql"
+database.<db name>.host = "<host>"
+database.<db name>.database = "<database>"
+database.<db name>.username = "<username>"
+database.<db name>.password = "<password>"
+```
+
+#### SQLite
+```
+// <string: db name> could be "default" or "whatever"
+database.<db name>.driver = "mysql"
+database.<db name>.database = "<path to database.sqlite>"
+```
+
 ## Command line interface
-```
-php artisan "request_uri=/<controller>/<method>"
-php artisan "request_uri=/<module>/<controller>/<method>"
-```
+
+Convenient commands to help you in terminal.
+Wink to @laravel
 
 ### Commands list
 ```
-php artisan request_uri="/cli/about/index"
+php artisan migrate
+php artisan db:seed
 ```
 
 ## Testing
