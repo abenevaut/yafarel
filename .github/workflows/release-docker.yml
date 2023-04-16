@@ -1,6 +1,17 @@
 name: release-docker
 
 on:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - Dockerfile.yaf
+      - Dockerfile.ci
+      - runtime
+      - spec
+      - .rspec
+      - .rubocop.yml
+      - Gemfile
+      - .Gemfile.lock
   push:
     branches:
       - master
@@ -8,16 +19,25 @@ on:
       - Dockerfile.yaf
       - Dockerfile.ci
 
+env:
+  php_version: 81
+
 jobs:
 
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: "Set current date as env variable"
+        run: |
+          echo "builddate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        id: version  # this is used on variable path
+
       - name: Build docker image
         run: |
-          docker build . --file Dockerfile --tag abenevaut/yaf-framework:tests
-#          docker build . --file Dockerfile --tag abenevaut/yaf-framework-ci:tests
           docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
-          docker push abenevaut/yaf-framework:0.php81
-#          docker push abenevaut/yaf-framework-ci:0.php81
+          docker build . --file Dockerfile --tag abenevaut/yaf-framework:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} --cache-from abenevaut/yaf-framework:latest
+          docker push abenevaut/yaf-framework:${{ steps.version.outputs.builddate }}-php${{ env.php_version }}
+#          docker build . --file Dockerfile --tag abenevaut/yaf-framework-ci:1.0-php${{ env.php_version }} --cache-from abenevaut/yaf-framework-ci:latest
+#          docker push abenevaut/yaf-framework-ci:${{ env.yaf_framework_ci_version }}-php${{ env.php_version }}
