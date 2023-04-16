@@ -23,6 +23,7 @@ jobs:
       - name: Build docker image abenevaut/yafarel
         run: |
           docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
+          docker pull abenevaut/yafarel:latest-php${{ env.php_version }}
           docker build . --file Dockerfile.yaf --tag abenevaut/yafarel:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} --cache-from abenevaut/yafarel:latest-php${{ env.php_version }}
           docker tag abenevaut/yafarel:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} abenevaut/yafarel:latest-php${{ env.php_version }}
           docker push --all-tags abenevaut/yafarel
@@ -30,6 +31,7 @@ jobs:
       - name: Build docker image abenevaut/yafarel-ci
         run: |
           docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
+          docker pull abenevaut/yafarel-ci:latest-php${{ env.php_version }}
           docker build . --file Dockerfile.yaf --tag abenevaut/yafarel-ci:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} --cache-from abenevaut/yafarel-ci:latest-php${{ env.php_version }}
           docker tag abenevaut/yafarel-ci:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} abenevaut/yafarel-ci:latest-php${{ env.php_version }}
           docker push --all-tags abenevaut/yafarel-ci
