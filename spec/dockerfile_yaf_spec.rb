@@ -11,7 +11,7 @@ describe 'Dockerfile.yaf' do
       '.',
       'dockerfile' => 'Dockerfile.yaf',
       't' => 'abenevaut/yaf-framework:rspec',
-      'cache-from' => 'abenevaut/yaf-framework:latest'
+      'cache-from' => 'abenevaut/yaf-framework:latest-php81'
     )
 
     set :os, family: :alpine

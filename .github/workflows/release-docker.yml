@@ -41,9 +41,9 @@ jobs:
           docker tag abenevaut/yaf-framework:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} abenevaut/yaf-framework:latest-php${{ env.php_version }}
           docker push --all-tags abenevaut/yaf-framework
 
-#      - name: Build docker image abenevaut/yaf-framework-ci
-#        run: |
-#          docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
-#          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework-ci:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} --cache-from abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
-#          docker tag abenevaut/yaf-framework-ci:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
-#          docker push --all-tags abenevaut/yaf-framework-ci
+      - name: Build docker image abenevaut/yaf-framework-ci
+        run: |
+          docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
+          docker build . --file Dockerfile.yaf --tag abenevaut/yaf-framework-ci:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} --cache-from abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
+          docker tag abenevaut/yaf-framework-ci:${{ steps.version.outputs.builddate }}-php${{ env.php_version }} abenevaut/yaf-framework-ci:latest-php${{ env.php_version }}
+          docker push --all-tags abenevaut/yaf-framework-ci
