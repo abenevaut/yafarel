@@ -1,6 +1,6 @@
 # This is a sample Dockerfile for a YAF production application
 
-FROM abenevaut/yaf-framework:php81
+FROM abenevaut/yafarel:php81
 
 LABEL maintainer="<Your name & email>"
 

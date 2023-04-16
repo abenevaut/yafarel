@@ -10,8 +10,8 @@ describe 'Dockerfile.ci' do
     image = ::Docker::Image.build_from_dir(
       '.',
       'dockerfile' => 'Dockerfile.ci',
-      't' => 'abenevaut/yaf-framework-ci:rspec',
-      'cache-from' => 'abenevaut/yaf-framework-ci:latest-php81'
+      't' => 'abenevaut/yafarel-ci:rspec',
+      'cache-from' => 'abenevaut/yafarel-ci:latest-php81'
     )
 
     set :os, family: :alpine
