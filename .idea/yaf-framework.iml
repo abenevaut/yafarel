@@ -6,7 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/app/Domain" isTestSource="true" packagePrefix="App\Domain\" />
       <sourceFolder url="file://$MODULE_DIR$/app/Services" isTestSource="true" packagePrefix="App\Services\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/coverage" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
