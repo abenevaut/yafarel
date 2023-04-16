@@ -3,19 +3,19 @@ require:
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
 RSpec/MultipleExpectations:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
 RSpec/RepeatedExampleGroupBody:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
 Metrics/LineLength:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
 Metrics/BlockLength:
   Exclude:
-    - 'spec/*.rb'
+    - 'tests/spec/*.rb'
