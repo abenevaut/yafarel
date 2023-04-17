@@ -14,20 +14,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: abenevaut/yafarel-ci:latest-php81
-#      image: abenevaut/yafarel-ci:latest-php81
-#      volumes:
-#        - ${{ github.workspace }}/vendor:/composer/vendor
     concurrency:
       group: test-${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     strategy:
       fail-fast: true
     steps:
-
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
-
       - run: |
           cp app.ini.example app.ini
           composer validate --strict
