@@ -36,22 +36,22 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Initialize PHP ${{ env.php_version }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.php_version }}
-          extensions: yaf
-          ini-values: yaf.use_spl_autoload=1, yaf.cache_config=0, yaf.use_namespace=1, yaf.environ=testing
-          coverage: pcov
-          tools: composer:v2
+#      - name: Initialize PHP ${{ env.php_version }}
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: ${{ env.php_version }}
+#          extensions: yaf
+#          ini-values: yaf.use_spl_autoload=1, yaf.cache_config=0, yaf.use_namespace=1, yaf.environ=testing
+#          coverage: pcov
+#          tools: composer:v2
 
-      - name: Configure Composer cache
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: ~/vendor
-          key: ${{ runner.os }}-node-php_${{ env.php_version }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-node-php_${{ env.php_version }}-
+#      - name: Configure Composer cache
+#        id: composer-cache
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/vendor
+#          key: ${{ runner.os }}-node-php_${{ env.php_version }}-${{ hashFiles('**/composer.lock') }}
+#          restore-keys: ${{ runner.os }}-node-php_${{ env.php_version }}-
 
       - name: Composer install
         if: steps.composer-cache.outputs.cache-hit != 'true'
