@@ -23,9 +23,11 @@ jobs:
     strategy:
       fail-fast: true
     steps:
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+
       - run: |
           cp app.ini.example app.ini
           composer validate --strict
