@@ -23,6 +23,10 @@ describe 'Dockerfile.ci' do
     command('docker-compose -v').stdout
   end
 
+  def composer_version
+    command('composer -V').stdout
+  end
+
   describe package('openssh-client-common') do
     it { is_expected.to be_installed }
   end
@@ -56,5 +60,9 @@ describe 'Dockerfile.ci' do
       expect(subject.stdout).to match(/yaf.use_spl_autoload => 1 => 1/)
       expect(subject.stdout).to match(/yaf.environ => testing => testing/)
     end
+  end
+
+  it 'installs composer' do
+    expect(composer_version).to include('2.5.5')
   end
 end
