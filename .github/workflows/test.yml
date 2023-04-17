@@ -13,10 +13,10 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    container:
-      image: abenevaut/yafarel-ci:latest-php81
-      volumes:
-        - ${{ github.workspace }}/vendor:/composer/vendor
+    container: abenevaut/yafarel-ci:latest-php81
+#      image: abenevaut/yafarel-ci:latest-php81
+#      volumes:
+#        - ${{ github.workspace }}/vendor:/composer/vendor
     concurrency:
       group: test-${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
