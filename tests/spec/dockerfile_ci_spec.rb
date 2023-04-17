@@ -27,6 +27,10 @@ describe 'Dockerfile.ci' do
     command('composer -V').stdout
   end
 
+  def bash_version
+    command('bash --version').stdout
+  end
+
   describe package('openssh-client-common') do
     it { is_expected.to be_installed }
   end
@@ -64,5 +68,9 @@ describe 'Dockerfile.ci' do
 
   it 'installs composer' do
     expect(composer_version).to include('2.5.5')
+  end
+
+  it 'installs bash' do
+    expect(bash_version).to include('5.1.16')
   end
 end
