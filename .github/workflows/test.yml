@@ -64,9 +64,9 @@ jobs:
         run: |
           cp app.ini.example app.ini
           vendor/bin/phpunit --coverage-clover=coverage/clover.xml
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          DB_PASSWORD: password
+#        env:
+#          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+#          DB_PASSWORD: password
 
 #      - name: Send coverage
 #        run: |
