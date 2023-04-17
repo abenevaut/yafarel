@@ -23,13 +23,27 @@ jobs:
     strategy:
       fail-fast: true
     steps:
+
       - name: Checkout project
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
+
+      - name: Configure Composer cache
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/vendor
+          key: ${{ runner.os }}-node-php${{ env.php_version }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-node-php${{ env.php_version }}-
+
+      - name: Composer install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: |
+          composer validate --strict
+          composer install --optimize-autoloader --no-interaction --prefer-dist
+
       - name: Test
         run: |
           cp app.ini.example app.ini
-          composer validate --strict
-          composer install --optimize-autoloader --no-interaction --prefer-dist
           vendor/bin/phpunit --coverage-clover=coverage/clover.xml
