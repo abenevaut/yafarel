@@ -71,6 +71,7 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initLogger()
     {
         if (!Registry::get('log')) {
+            $hit = uniqid();
             $logger = (new Logger('default'))
                 ->setTimezone(
                     new \DateTimeZone(Config::get('application.timezone'))
@@ -86,10 +87,10 @@ final class Bootstrap extends Bootstrap_Abstract
                         'Y-m-d H:i:s'
                     ))
                 )
-                ->pushProcessor(function ($record) {
+                ->pushProcessor(function ($record) use ($hit) {
                     $record->extra['sessionId'] = Session::sessionId();
                     $record->extra['userId'] = Session::userId();
-                    $record->extra['hit'] = uniqid();
+                    $record->extra['hit'] = $hit;
 
                     return $record;
                 });
