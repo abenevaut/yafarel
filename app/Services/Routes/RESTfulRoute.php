@@ -38,7 +38,10 @@ final class RESTfulRoute implements Route_Interface
             $method = strtolower($request->getMethod());
 
             // POST, PUT od DELETE fallback method
-            if (in_array($method, ['post', 'put', 'delete']) && isset($_POST['_method'])) {
+            if (
+                in_array($method, ['post', 'put', 'delete'])
+                && isset($_POST['_method'])
+            ) {
                 $method = strtolower($_POST['_method']);
             }
 
