@@ -9,6 +9,11 @@ final class Environment
         return self::isEnvironment(__FUNCTION__);
     }
 
+    public static function isNotProduction(): bool
+    {
+        return !self::isProduction();
+    }
+
     public static function isLocal(): bool
     {
         return self::isEnvironment(__FUNCTION__);

@@ -10,11 +10,12 @@
   "require": {
     "php": "^8.1",
     "ext-yaf": "^3.1",
-    "illuminate/console": "^10.7",
+    "filp/whoops": "^2.15",
     "illuminate/database": "^10.7",
     "illuminate/events": "^10.7",
     "monolog/monolog": "^3.3",
-    "nesbot/carbon": "^2.66"
+    "nesbot/carbon": "^2.66",
+    "nunomaduro/collision": "^7.5"
   },
   "require-dev": {
     "mockery/mockery": "^1.5",

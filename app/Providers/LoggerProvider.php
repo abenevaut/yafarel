@@ -19,13 +19,13 @@ final class LoggerProvider extends ProviderAbstract
 
             return (new Logger('default'))
                 ->setTimezone(
-                    new \DateTimeZone($config->get('application.timezone'))
+                    new \DateTimeZone($config->get('application')->get('timezone'))
                 )
                 ->pushHandler(
                     (new RotatingFileHandler(
-                        $config->get('logger.directory'),
-                        $config->get('logger.maxFiles'),
-                        Level::fromName($config->get('logger.level'))
+                        $config->get('logger')->get('directory'),
+                        $config->get('logger')->get('maxFiles'),
+                        Level::fromName($config->get('logger')->get('level'))
                     ))
                         ->setFormatter(new LineFormatter(
                             "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n",
@@ -33,8 +33,13 @@ final class LoggerProvider extends ProviderAbstract
                         ))
                 )
                 ->pushProcessor(function ($record) use ($hit) {
-                    $record->extra['sessionId'] = Session::sessionId();
-                    $record->extra['userId'] = Session::userId();
+                    if (
+                        !$this->dispatcher->getRequest()->isCli()
+                    ) {
+                        $record->extra['sessionId'] = Session::sessionId();
+                        $record->extra['userId'] = Session::userId();
+                    }
+
                     $record->extra['hit'] = $hit;
 
                     return $record;

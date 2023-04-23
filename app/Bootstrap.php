@@ -24,8 +24,34 @@ final class Bootstrap extends Bootstrap_Abstract
     public function _initTimezone(Dispatcher $dispatcher)
     {
         date_default_timezone_set(
-            $dispatcher->getApplication()->getConfig()->get('application.timezone')
+            $dispatcher
+                ->getApplication()
+                ->getConfig()
+                ->get('application')
+                ->get('timezone')
         );
+    }
+
+    public function _initExceptionsHandler(Dispatcher $dispatcher)
+    {
+        $whoops = new \Whoops\Run();
+        $whoops->writeToOutput(Environment::isNotProduction());
+
+        if ($dispatcher->getRequest()->isCli()) {
+            $whoops->pushHandler(new \NunoMaduro\Collision\Handler());
+        }
+        if ($dispatcher->getRequest()->isXmlHttpRequest()) {
+            $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler());
+        }
+        else {
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        }
+
+        $whoops->pushHandler(new \Whoops\Handler\CallbackHandler(function ($exception) {
+            \App\Facades\Log::emergency($exception);
+        }));
+
+        $whoops->register();
     }
 
     public function _initServices(Dispatcher $dispatcher)

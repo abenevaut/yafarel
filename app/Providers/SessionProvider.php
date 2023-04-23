@@ -9,16 +9,23 @@ final class SessionProvider extends ProviderAbstract
 {
     public function boot(): self
     {
+        if (
+            $this->dispatcher->getRequest()->isCli()
+//            && $this->dispatcher->getRequest()->isArtisan()
+        ) {
+            return $this;
+        }
+
         $this->bind(Session::class, function () {
             $config = $this->dispatcher->getApplication()->getConfig();
 
             return (new Session(
-                $config->get('session.name'),
-                $config->get('session.domain'),
-                $config->get('application.baseUri'),
-                $config->get('session.lifetime'),
-                $config->get('session.secure'),
-                $config->get('session.sameSite')
+                $config->get('session')->get('name'),
+                $config->get('session')->get('domain'),
+                $config->get('application')->get('baseUri'),
+                $config->get('session')->get('lifetime'),
+                $config->get('session')->get('secure'),
+                $config->get('session')->get('sameSite')
             ))
                 ->start()
             ;
