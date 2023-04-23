@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Infrastructure\ProviderAbstract;
-use App\Facades\Session;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
@@ -33,13 +32,6 @@ final class LoggerProvider extends ProviderAbstract
                         ))
                 )
                 ->pushProcessor(function ($record) use ($hit) {
-                    if (
-                        !$this->dispatcher->getRequest()->isCli()
-                    ) {
-                        $record->extra['sessionId'] = Session::sessionId();
-                        $record->extra['userId'] = Session::userId();
-                    }
-
                     $record->extra['hit'] = $hit;
 
                     return $record;

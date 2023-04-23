@@ -37,10 +37,10 @@ final class Bootstrap extends Bootstrap_Abstract
         $whoops = new \Whoops\Run();
         $whoops->writeToOutput(Environment::isNotProduction());
 
-        if ($dispatcher->getRequest()->isCli()) {
+        if ($dispatcher->getRequest()->isCli() && $dispatcher->getRequest()->getModuleName() === 'Artisan') {
             $whoops->pushHandler(new \NunoMaduro\Collision\Handler());
         }
-        if ($dispatcher->getRequest()->isXmlHttpRequest()) {
+        elseif ($dispatcher->getRequest()->isXmlHttpRequest()) {
             $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler());
         }
         else {

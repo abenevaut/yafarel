@@ -9,10 +9,7 @@ class IndexController extends ControllerAbstract
     {
         $this->getView()->content = 'Hello World';
 
-        Log::debug("View content: {$this->getView()->content}", [
-            'class' => __CLASS__,
-            'method' => __METHOD__,
-        ]);
+        Log::debug("View content: {$this->getView()->content}");
     }
 
     public function argumentValidatedAction($id, $name)
@@ -22,9 +19,6 @@ class IndexController extends ControllerAbstract
         $this->getView()->id = $id;
         $this->getView()->name = $name;
 
-        Log::debug("View content: {$this->getView()->content}", [
-            'class' => __CLASS__,
-            'method' => __METHOD__,
-        ]);
+        Log::debug("View content: {$this->getView()->content}");
     }
 }

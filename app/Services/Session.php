@@ -27,9 +27,9 @@ final class Session
         YafSession::getInstance()->set($key, $value);
     }
 
-    public static function sessionId(): int
+    public static function sessionId(): string
     {
-        return (int) session_id();
+        return session_id();
     }
 
     public static function userId(): int
