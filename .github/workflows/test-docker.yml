@@ -6,7 +6,7 @@ on:
     paths:
       - Dockerfile.yaf
       - Dockerfile.ci
-      - runtime
+      - rootfs
       - tests/spec
       - .rspec
       - .rubocop.yml
@@ -17,7 +17,7 @@ on:
     paths:
       - Dockerfile.yaf
       - Dockerfile.ci
-      - runtime
+      - rootfs
       - tests/spec
       - .rspec
       - .rubocop.yml
