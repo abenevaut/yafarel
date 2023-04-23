@@ -4,19 +4,20 @@ LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
 
 # alpine v3.16 - https://pkgs.alpinelinux.org/packages
 RUN apk --update --no-cache add \
-    bash \
-    gnupg \
-    gpgv \
-    git \
-    python3 \
-    python3-dev \
-    build-base \
-    libffi-dev \
-    openssl-dev \
-    libgcc \
-    py3-pip \
-    openssh-client-common \
-    sshpass
+        bash \
+        gnupg \
+        gpgv \
+        git \
+        python3 \
+        python3-dev \
+        build-base \
+        libffi-dev \
+        openssl-dev \
+        libgcc \
+        py3-pip \
+        openssh-client-common \
+        sshpass \
+    && rm -rf /var/cache/apk/*
 
 # https://pypi.org/project/docker-compose/
 RUN pip install --no-cache-dir docker-compose==1.29.2

@@ -17,7 +17,7 @@ class IndexController extends ControllerAbstract
 
     public function argumentValidatedAction($id, $name)
     {
-        // /argument/123001/anto234ine
+        // /argument/123001/stringhere
 
         $this->getView()->id = $id;
         $this->getView()->name = $name;
