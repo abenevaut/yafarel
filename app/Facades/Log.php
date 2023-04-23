@@ -2,12 +2,13 @@
 
 namespace App\Facades;
 
-use App\Infrastructure\SingletonFacadeAbstract;
+use App\Infrastructure\FacadeAbstract;
+use Monolog\Logger;
 
-final class Log extends SingletonFacadeAbstract
+final class Log extends FacadeAbstract
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'log';
+        return Logger::class;
     }
 }

@@ -11,27 +11,45 @@ abstract class ProviderAbstract
 
     abstract public function boot(): self;
 
+    /**
+     * @throws ServiceAlreadyRegisteredException
+     */
     protected function bind(string $serviceName, \Closure $serviceInstance): self
     {
-        if (Registry::get($serviceName)) {
-            throw new \Exception("Service {$serviceName} already registered.");
-        }
+        return $this
+            ->isServiceRegistered($serviceName)
+            // Register service as an instance
+            ->registerService($serviceName, call_user_func($serviceInstance))
+        ;
+    }
 
-        Registry::set($serviceName, $serviceInstance());
+    /**
+     * @throws ServiceAlreadyInstantiatedException
+     * @throws ServiceAlreadyRegisteredException
+     */
+    protected function singleton(string $serviceName, \Closure $serviceInstance): self
+    {
+        return $this
+            ->isServiceRegistered($serviceName)
+            // Register service as a \Closure to be instantiated later
+            ->registerService($serviceName, $serviceInstance)
+        ;
+    }
+
+    /**
+     * @throws ServiceAlreadyRegisteredException
+     */
+    private function isServiceRegistered($serviceName): self
+    {
+        if (Registry::get($serviceName)) {
+            throw new ServiceAlreadyRegisteredException($serviceName);
+        }
 
         return $this;
     }
 
-    protected function singleton(string $serviceName, \Closure $serviceInstance): self
+    private function registerService(string $serviceName, mixed $serviceInstance): self
     {
-        if (Registry::get($serviceName)) {
-            throw new \Exception("Service {$serviceName} already registered.");
-        }
-
-         if (Registry::get(md5($serviceName))) {
-            throw new \Exception("Service {$serviceName} already instantiated.");
-        }
-
         Registry::set($serviceName, $serviceInstance);
 
         return $this;

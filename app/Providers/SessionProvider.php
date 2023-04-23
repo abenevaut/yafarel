@@ -9,7 +9,7 @@ final class SessionProvider extends ProviderAbstract
 {
     public function boot(): self
     {
-        $this->bind('session', function () {
+        $this->bind(Session::class, function () {
             $config = $this->dispatcher->getApplication()->getConfig();
 
             return (new Session(

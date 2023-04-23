@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Router;
+namespace App\Infrastructure;
 
+use Yaf\Request_Abstract;
 use Yaf\Route\Regex;
 use Yaf\Route\Rewrite;
 use Yaf\Route_Interface;
-use Yaf\Request_Abstract;
 
 /**
  * RESTful Route

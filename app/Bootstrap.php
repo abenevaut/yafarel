@@ -30,10 +30,10 @@ final class Bootstrap extends Bootstrap_Abstract
 
     public function _initServices(Dispatcher $dispatcher)
     {
-        (new RouterProvider($dispatcher))->boot();
-        (new SessionProvider($dispatcher))->boot();
-        (new LoggerProvider($dispatcher))->boot();
-        (new DatabaseProvider($dispatcher))->boot();
+        $services = include(__DIR__ . '/services.php');
+        foreach ($services as $service) {
+            (new $service($dispatcher))->boot();
+        }
     }
 
     public function _initPlugins(Dispatcher $dispatcher)

@@ -15,6 +15,19 @@ abstract class FacadeAbstract
 
     protected static function getInstance(): mixed
     {
-        return Registry::get(static::getFacadeAccessor());
+        $instantiableClass = static::getFacadeAccessor();
+        $instance = Registry::get($instantiableClass);
+
+        // Create instance on first demand
+        if (class_exists($instantiableClass) && $instance instanceof \Closure) {
+            $callable = Registry::get($instantiableClass);
+            $instance = $callable();
+            // Free \Closure from registry
+            Registry::del($instantiableClass);
+            // Register instance to registry
+            Registry::set($instantiableClass, $instance);
+        }
+
+        return $instance;
     }
 }

@@ -11,7 +11,7 @@ final class DatabaseProvider extends ProviderAbstract
 {
     public function boot(): self
     {
-        $this->singleton('database', function () {
+        $this->singleton(EloquentCapsule::class, function () {
             $capsule = new EloquentCapsule();
             $config = $this->dispatcher->getApplication()->getConfig();
 
