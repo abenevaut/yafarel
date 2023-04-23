@@ -2,7 +2,7 @@ name: test-docker
 
 on:
   push:
-    branches: [ master ]
+    branches: [ php81 ]
     paths:
       - Dockerfile.yaf
       - Dockerfile.ci
@@ -13,7 +13,7 @@ on:
       - Gemfile
       - .Gemfile.lock
   pull_request:
-    branches: [ master ]
+    branches: [ php81 ]
     paths:
       - Dockerfile.yaf
       - Dockerfile.ci
@@ -40,7 +40,7 @@ jobs:
 #      - name: lint Dockerfile.ci
 #        run: docker run --rm -i hadolint/hadolint < Dockerfile.ci
 
-  tests:
+  test:
     runs-on: ubuntu-latest
     steps:
 

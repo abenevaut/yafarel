@@ -9,10 +9,7 @@ class AuthController extends ControllerAbstract
     {
         $this->getView()->content = 'LoginForm';
 
-        Log::debug("View content: {$this->getView()->content}", [
-            'class' => __CLASS__,
-            'method' => __METHOD__,
-        ]);
+        Log::debug("View content: {$this->getView()->content}");
     }
 
     public function loginAction()
@@ -24,19 +21,13 @@ class AuthController extends ControllerAbstract
         $this->getView()->username = $username;
         $this->getView()->password = $password;
 
-        Log::debug("View content: {$this->getView()->content}", [
-            'class' => __CLASS__,
-            'method' => __METHOD__,
-        ]);
+        Log::debug("View content: {$this->getView()->content}");
     }
 
     public function logoutAction()
     {
         $this->getView()->content = 'Logout';
 
-        Log::debug("View content: {$this->getView()->content}", [
-            'class' => __CLASS__,
-            'method' => __METHOD__,
-        ]);
+        Log::debug("View content: {$this->getView()->content}");
     }
 }
