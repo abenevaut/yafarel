@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir docker-compose==1.29.2
 RUN pecl install pcov
 RUN docker-php-ext-enable pcov
 
-COPY runtime/docker-php-ext-yaf.ini.testing /usr/local/etc/php/conf.d/docker-php-ext-yaf.ini
+COPY rootfs/usr/local/etc/php/conf.d/docker-php-ext-yaf.ini.testing /usr/local/etc/php/conf.d/docker-php-ext-yaf.ini
 
 # Download & install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
