@@ -17,9 +17,14 @@ final class Session
         protected string $sameSite
     ) {}
 
-    public static function getInstance(): Session
+    public static function get(string $key): mixed
     {
-        return Registry::get('session');
+        return YafSession::getInstance()->get($key);
+    }
+
+    public static function set(string $key, mixed $value): void
+    {
+        YafSession::getInstance()->set($key, $value);
     }
 
     public static function sessionId(): int
@@ -29,7 +34,12 @@ final class Session
 
     public static function userId(): int
     {
-        return (int) self::getInstance()->get('userId');
+        return (int) self::get('userId');
+    }
+
+    public static function setUserId(int $userId): void
+    {
+        self::set('userId', $userId);
     }
 
     public function start(): self
@@ -43,7 +53,7 @@ final class Session
                 'path' => $this->baseUri,
                 'domain' => $this->domain,
                 'secure' => $this->secure,
-                'httponly' => !$this->secure,
+                'httponly' => false,
                 'samesite' => $this->sameSite
             ]);
 
@@ -58,15 +68,5 @@ final class Session
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
-    }
-
-    public function get(string $key): mixed
-    {
-        return YafSession::getInstance()->get($key);
-    }
-
-    public function set(string $key, mixed $value): void
-    {
-        YafSession::getInstance()->set($key, $value);
     }
 }

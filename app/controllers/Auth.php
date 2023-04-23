@@ -1,9 +1,9 @@
 <?php
 
-use App\Services\Log;
-use Yaf\Controller_Abstract;
+use App\Facades\Log;
+use App\Infrastructure\ControllerAbstract;
 
-class AuthController extends Controller_Abstract
+class AuthController extends ControllerAbstract
 {
     public function indexAction()
     {

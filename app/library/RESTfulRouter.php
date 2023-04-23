@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Services\Routes;
-
+use App\Infrastructure\RESTfulRoute;
 use Yaf\Router;
 
 /**

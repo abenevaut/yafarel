@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Routes;
+namespace App\Infrastructure;
 
+use Yaf\Request_Abstract;
 use Yaf\Route\Regex;
 use Yaf\Route\Rewrite;
 use Yaf\Route_Interface;
-use Yaf\Request_Abstract;
 
 /**
  * RESTful Route
@@ -38,7 +38,10 @@ final class RESTfulRoute implements Route_Interface
             $method = strtolower($request->getMethod());
 
             // POST, PUT od DELETE fallback method
-            if (in_array($method, ['post', 'put', 'delete']) && isset($_POST['_method'])) {
+            if (
+                in_array($method, ['post', 'put', 'delete'])
+                && isset($_POST['_method'])
+            ) {
                 $method = strtolower($_POST['_method']);
             }
 

@@ -1,11 +1,23 @@
 <?php
 
 return [
+
     ['get', '/', 'Index', 'index'],
+
+    // PCRE syntax
+    ['get', '^/argument/(?<id>[1-9]\d*)/(?<name>\w+)$', 'Index', 'argumentValidated'],
+
     ['get', '/auth', 'Auth', 'index'],
-    ['post', '/auth/login', 'Auth', 'login'],
-    ['post', '/auth/logout', 'Auth', 'logout'],
+    ['post', '/auth/connect', 'Auth', 'login'],
+    ['post', '/auth/disconnect', 'Auth', 'logout'],
+
+    ['get', '/auth/signin', 'Auth', 'register'],
     ['post', '/auth/register', 'Auth', 'register'],
-    ['post', '/auth/forgot-password', 'Auth', 'forgotPassword'],
-    ['post', '/auth/reset-password', 'Auth', 'resetPassword'],
+
+    ['get', '/auth/forgot-password', 'Auth', 'forgotPassword'],
+    ['post', '/auth/request-reset-password', 'Auth', 'forgotPassword'],
+
+    ['get', '/auth/reset-password', 'Auth', 'resetPassword'],
+    ['post', '/auth/request-reset-password', 'Auth', 'resetPassword'],
+
 ];

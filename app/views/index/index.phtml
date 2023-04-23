@@ -1,10 +1,72 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title><?php echo $content; ?></title>
+    <meta charset="utf-8">
+    <title><?= $content ?></title>
+    <link rel="stylesheet" href="https://unpkg.com/teutonic-css@0.7.13/teutonic.min.css">
 </head>
-<body>
-    <?php echo $content; ?>
-    <br>
-    <a href="/auth/login">Login</a>
+<body class="flex column min-height-full">
+
+<header class="flex wrap-no gap_xs ma-t_m">
+    <div class="span-auto">
+        <a href="/" class="pa_s pa-l_l block bo-t_px bo-r_px bo-b_px text-bold docs-teutonic-link active">
+            Yafarel
+        </a>
+    </div>
+    <div class="span-auto ma-l-auto">
+        <a href="/auth/register" class="button ghost ma-r_s">Register</a>
+        <a href="/auth/login" class="button prime ma-r_l">Login</a>
+    </div>
+</header>
+
+<div class="span-auto">
+    <!-- MS Edge:  ↓  pa_l doesm't work for some stange reason -->
+    <nav class="pa-h_l pa-v_m flex gap_s">
+<!--        <div>-->
+<!--            <h3 class="text_l bo-b_xs pa-b_xs">Navigation</h3>-->
+<!--            <ul class="columns cols-6 cols-4-t cols-2-p">-->
+<!---->
+<!--                <li>-->
+<!--                    <a href="/examples/components" class="block-link pa_xs">Components</a>-->
+<!--                </li>-->
+<!---->
+<!--                <li>-->
+<!--                    <a href="/examples/layout" class="block-link pa_xs">Layout</a>-->
+<!--                </li>-->
+<!---->
+<!--            </ul>-->
+<!--        </div>-->
+    </nav>
+</div>
+
+<div class="pa-h_l">
+    <p class="text-hero_m text-sans text-black read_xxl">
+        Yafarel, lightweight PHP framework
+    </p>
+    <p class="text_xxl text-sans read_xl ma-t_m">
+        based on robust packages
+    </p>
+    <ul class="columns gap-h_s cols-3 cols-2-p ma-t_px-">
+        <li class="bo-t_px text-clip"><a class="block-link pa_xs" href="http://www.4chan.org/">YAF</a></li>
+        <li class="bo-t_px text-clip"><a class="block-link pa_xs" href="https://alistapart.com">Eloquent</a></li>
+        <li class="bo-t_px text-clip"><a class="block-link pa_xs" href="https://www.apple.com">Monolog</a></li>
+        <li class="bo-t_px text-clip"><a class="block-link pa_xs" href="https://www.apple.com">Illuminate console</a></li>
+        <li class="bo-t_px text-clip"><a class="block-link pa_xs" href="https://teutonic.co/">Teutonic CSS</a></li>
+    </ul>
+</div>
+
+<footer class="pa-h_l pa-v_m text_s span-auto">
+    <nav class="flex">
+        <div>
+            <b>Yafarel</b> v0.0.0<br>
+            by <a href="https://github.com/abenevaut" class="link">Antoine Benevaut</a><br>
+        </div>
+        <div class="ma-l-auto span-auto flex-end">
+            <a class="text-bold link" href="https://github.com/abenevaut/yafarel">GitHub ›</a>
+        </div>
+    </nav>
+</footer>
+
 </body>
 </html>
+<!-- You have reached the end of the internet  -->
