@@ -40,7 +40,7 @@ jobs:
 #      - name: lint Dockerfile.ci
 #        run: docker run --rm -i hadolint/hadolint < Dockerfile.ci
 
-  tests:
+  test:
     runs-on: ubuntu-latest
     steps:
 
