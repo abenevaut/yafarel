@@ -1,9 +1,9 @@
 <?php
 
-use App\Services\Log;
-use Yaf\Controller_Abstract;
+use App\Facades\Log;
+use App\Infrastructure\ControllerAbstract;
 
-class IndexController extends Controller_Abstract
+class IndexController extends ControllerAbstract
 {
     public function indexAction()
     {
@@ -17,7 +17,7 @@ class IndexController extends Controller_Abstract
 
     public function argumentValidatedAction($id, $name)
     {
-        // https://stylix.primeum.local/yaf-framework/argument/123001/anto234ine
+        // /argument/123001/anto234ine
 
         $this->getView()->id = $id;
         $this->getView()->name = $name;

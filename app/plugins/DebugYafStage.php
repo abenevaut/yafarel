@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Log;
+use App\Facades\Log;
 use Yaf\Plugin_Abstract;
 use Yaf\Request_Abstract;
 use Yaf\Response_Abstract;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Routes;
+namespace App\Services\Router;
 
 use Yaf\Route\Regex;
 use Yaf\Route\Rewrite;
