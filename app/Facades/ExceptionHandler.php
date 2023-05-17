@@ -2,13 +2,13 @@
 
 namespace App\Facades;
 
-use App\Services\SessionService;
 use App\Infrastructure\FacadeAbstract;
+use App\Services\ExceptionHandlerService;
 
-final class Session extends FacadeAbstract
+final class ExceptionHandler extends FacadeAbstract
 {
     protected static function getFacadeAccessor(): string
     {
-        return SessionService::class;
+        return ExceptionHandlerService::class;
     }
 }

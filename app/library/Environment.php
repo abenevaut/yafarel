@@ -19,6 +19,11 @@ final class Environment
         return self::isEnvironment(__FUNCTION__);
     }
 
+    public static function isTesting(): bool
+    {
+        return self::isEnvironment(__FUNCTION__);
+    }
+
     private static function isEnvironment(string $environment): bool
     {
         $environment = strtolower($environment);
