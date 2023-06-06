@@ -1,0 +1,26 @@
+#!/bin/php
+<?php
+
+set_time_limit(0);
+
+define('PROJECT_PATH', getcwd());
+
+$environment = ini_get('yaf.environ');
+$config = (new \Yaf\Config\Ini(PROJECT_PATH . '/app.ini'))->toArray()[$environment];
+
+/*
+ * Specify dedicated Cli execution configurations
+ */
+$config['application']['modules'] = 'Artisan';
+
+$module = array_shift($argv);
+$controller = array_shift($argv);
+
+$app = (new \Yaf\Application($config, $environment));
+$app->getDispatcher()->autoRender(false);
+$app->getDispatcher()->flushInstantly(false);
+$app->getDispatcher()->returnResponse(true);
+$app
+    ->bootstrap()
+    ->getDispatcher()
+    ->dispatch(new \Yaf\Request\Simple('CLI', $module, $controller, 'handle', $argv));

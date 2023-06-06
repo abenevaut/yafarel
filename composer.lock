@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5dccc020dfd7afe84e99efa4d230baf",
+    "content-hash": "d3b8b17704df9d18663a2c746660306a",
     "packages": [
         {
             "name": "brick/math",
@@ -378,6 +378,70 @@
             "time": "2023-02-03T08:06:17+00:00"
         },
         {
+            "name": "illuminate/console",
+            "version": "v10.13.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/console.git",
+                "reference": "de9d4089c7003b752f4e006507c36842e2a55197"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/console/zipball/de9d4089c7003b752f4e006507c36842e2a55197",
+                "reference": "de9d4089c7003b752f4e006507c36842e2a55197",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "illuminate/collections": "^10.0",
+                "illuminate/contracts": "^10.0",
+                "illuminate/macroable": "^10.0",
+                "illuminate/support": "^10.0",
+                "illuminate/view": "^10.0",
+                "nunomaduro/termwind": "^1.13",
+                "php": "^8.1",
+                "symfony/console": "^6.2",
+                "symfony/process": "^6.2"
+            },
+            "suggest": {
+                "dragonmantank/cron-expression": "Required to use scheduler (^3.3.2).",
+                "ext-pcntl": "Required to use signal trapping.",
+                "guzzlehttp/guzzle": "Required to use the ping methods on schedules (^7.5).",
+                "illuminate/bus": "Required to use the scheduled job dispatcher (^10.0).",
+                "illuminate/container": "Required to use the scheduler (^10.0).",
+                "illuminate/filesystem": "Required to use the generator command (^10.0).",
+                "illuminate/queue": "Required to use closures for scheduled jobs (^10.0)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "10.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Console package.",
+            "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
+            "time": "2023-06-05T12:46:42+00:00"
+        },
+        {
             "name": "illuminate/container",
             "version": "v10.7.1",
             "source": {
@@ -601,6 +665,70 @@
             "time": "2023-02-16T15:35:09+00:00"
         },
         {
+            "name": "illuminate/filesystem",
+            "version": "v10.13.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/filesystem.git",
+                "reference": "53a46fed9b31617ce3a786690b2294f0a54559ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/53a46fed9b31617ce3a786690b2294f0a54559ea",
+                "reference": "53a46fed9b31617ce3a786690b2294f0a54559ea",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/collections": "^10.0",
+                "illuminate/contracts": "^10.0",
+                "illuminate/macroable": "^10.0",
+                "illuminate/support": "^10.0",
+                "php": "^8.1",
+                "symfony/finder": "^6.2"
+            },
+            "suggest": {
+                "ext-fileinfo": "Required to use the Filesystem class.",
+                "ext-ftp": "Required to use the Flysystem FTP driver.",
+                "ext-hash": "Required to use the Filesystem class.",
+                "illuminate/http": "Required for handling uploaded files (^7.0).",
+                "league/flysystem": "Required to use the Flysystem local driver (^3.0.16).",
+                "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^3.0).",
+                "league/flysystem-ftp": "Required to use the Flysystem FTP driver (^3.0).",
+                "league/flysystem-sftp-v3": "Required to use the Flysystem SFTP driver (^3.0).",
+                "psr/http-message": "Required to allow Storage::put to accept a StreamInterface (^1.0).",
+                "symfony/filesystem": "Required to enable support for relative symbolic links (^6.2).",
+                "symfony/mime": "Required to enable support for guessing extensions (^6.2)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "10.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Filesystem package.",
+            "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
+            "time": "2023-03-22T21:14:41+00:00"
+        },
+        {
             "name": "illuminate/macroable",
             "version": "v10.7.1",
             "source": {
@@ -764,6 +892,60 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2023-04-11T08:12:43+00:00"
+        },
+        {
+            "name": "illuminate/view",
+            "version": "v10.13.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/view.git",
+                "reference": "acf034c30db23debb797a94641a43780aeecd6c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/view/zipball/acf034c30db23debb797a94641a43780aeecd6c1",
+                "reference": "acf034c30db23debb797a94641a43780aeecd6c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "illuminate/collections": "^10.0",
+                "illuminate/container": "^10.0",
+                "illuminate/contracts": "^10.0",
+                "illuminate/events": "^10.0",
+                "illuminate/filesystem": "^10.0",
+                "illuminate/macroable": "^10.0",
+                "illuminate/support": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "10.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\View\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate View package.",
+            "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
+            "time": "2023-05-30T14:18:22+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1468,6 +1650,70 @@
             "time": "2023-03-01T10:25:55+00:00"
         },
         {
+            "name": "symfony/finder",
+            "version": "v6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "d9b01ba073c44cef617c7907ce2419f8d00d75e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/d9b01ba073c44cef617c7907ce2419f8d00d75e2",
+                "reference": "d9b01ba073c44cef617c7907ce2419f8d00d75e2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "symfony/filesystem": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Finds files and directories via an intuitive fluent interface",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/finder/tree/v6.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-04-02T01:25:41+00:00"
+        },
+        {
             "name": "symfony/polyfill-ctype",
             "version": "v1.27.0",
             "source": {
@@ -1879,6 +2125,67 @@
                 }
             ],
             "time": "2022-11-03T14:55:06+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "8741e3ed7fe2e91ec099e02446fb86667a0f1628"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/8741e3ed7fe2e91ec099e02446fb86667a0f1628",
+                "reference": "8741e3ed7fe2e91ec099e02446fb86667a0f1628",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Executes commands in sub-processes",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/process/tree/v6.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-05-19T08:06:44+00:00"
         },
         {
             "name": "symfony/service-contracts",

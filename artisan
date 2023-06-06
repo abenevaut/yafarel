@@ -1,26 +1,29 @@
-#!/bin/php
+#!/usr/bin/env php
 <?php
 
-set_time_limit(0);
+require __DIR__.'/vendor/autoload.php';
 
-define('PROJECT_PATH', getcwd());
+use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as EloquentCapsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Console\Application;
 
-$environment = ini_get('yaf.environ');
-$config = (new \Yaf\Config\Ini(PROJECT_PATH . '/app.ini'))->toArray()[$environment];
+$container = new Container;
+$events = new Dispatcher($container);
 
-/*
- * Specify dedicated Cli execution configurations
- */
-$config['application']['modules'] = 'Artisan';
+$capsule = new EloquentCapsule();
 
-$module = array_shift($argv);
-$controller = array_shift($argv);
+$container->bind(\Illuminate\Database\ConnectionResolverInterface::class, fn() => $capsule);
+$container->bind(\Illuminate\Database\ConnectionResolverInterface::class, fn() => $capsule);
+$container->bind(\Illuminate\Database\Migrations\MigrationRepositoryInterface::class, \Illuminate\Database\Migrations\DatabaseMigrationRepository::class);
 
-$app = (new \Yaf\Application($config, $environment));
-$app->getDispatcher()->autoRender(false);
-$app->getDispatcher()->flushInstantly(false);
-$app->getDispatcher()->returnResponse(true);
-$app
-    ->bootstrap()
-    ->getDispatcher()
-    ->dispatch(new \Yaf\Request\Simple('CLI', $module, $controller, 'handle', $argv));
+$artisan = new Application($container, $events, 'Version 1');
+$artisan->setName('My Console App Name');
+
+$commands = require_once __DIR__ . '/app/commands.php';
+
+foreach ($commands as $command) {
+    $artisan->resolve($command);
+}
+
+$artisan->run();

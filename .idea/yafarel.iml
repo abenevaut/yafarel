@@ -82,6 +82,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/string" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/filp/whoops" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/console" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/view" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

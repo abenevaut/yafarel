@@ -1,5 +1,6 @@
 <?php
 
 return [
-    \App\Console\ExampleCommand::class,
+    \App\Console\HelloWorld::class,
+    \Illuminate\Database\Console\Migrations\MigrateCommand::class,
 ];
