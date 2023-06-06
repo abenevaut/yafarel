@@ -3,6 +3,10 @@
 application.directory = PROJECT_PATH "/app"
 application.baseUri = "/"
 application.timezone = "UTC"
+// Allows YAF to catch exception via ErrorController
+application.dispatcher.catchException = true
+// Allows YAF to throw exceptions
+application.dispatcher.throwException = true
 
 session.name = "yaf_session"
 session.domain = ".yaf.test"

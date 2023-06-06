@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Services\Session as SessionService;
+use App\Services\SessionService;
 use App\Infrastructure\FacadeAbstract;
 
 final class Session extends FacadeAbstract
