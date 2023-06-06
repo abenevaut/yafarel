@@ -12,9 +12,10 @@ final class LoggerProvider extends ProviderAbstract
 {
     public function boot(): self
     {
-        $this->singleton(Logger::class, function () {
+        $config = $this->dispatcher->getApplication()->getConfig();
+
+        $this->singleton(Logger::class, static function () use ($config) {
             $hit = uniqid();
-            $config = $this->dispatcher->getApplication()->getConfig();
 
             return (new Logger('default'))
                 ->setTimezone(
